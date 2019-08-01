@@ -1,19 +1,28 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
     email : {
         type : String,
         required : true,
-        unique : true,
+        unique : true
     },
 
     password : {
         type : String,
-        required : true,
+        required : true
     }
 })
+
+UserSchema.path('email').validate(function(value, done) {
+    this.model('User').count({ email: value }, function(err, count) {
+        if (err) {
+            return done(err);
+        } 
+        // If `count` is greater than zero, "invalidate"
+        done(!count);
+    });
+}, 'Email already exists');
 
 UserSchema.pre('save',async function(next){
     const user = this
@@ -27,6 +36,7 @@ UserSchema.pre('save',async function(next){
 
 UserSchema.statics.findByCredentials = async (email,password) => {
     const user = await User.findOne({email}) 
+    console.log(user);
     
     if(user === null){
         return 'user doesn\'t exist'
