@@ -14,16 +14,6 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
-UserSchema.path('email').validate(function(value, done) {
-    this.model('User').count({ email: value }, function(err, count) {
-        if (err) {
-            return done(err);
-        } 
-        // If `count` is greater than zero, "invalidate"
-        done(!count);
-    });
-}, 'Email already exists');
-
 UserSchema.pre('save',async function(next){
     const user = this
 
