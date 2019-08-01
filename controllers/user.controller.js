@@ -13,7 +13,7 @@ router.post('/add',async (req,res)=>{
 
     try{
         await user.save()
-        res.status(201).send(user)
+        res.status(201).send({success:true})
     }catch(e){
         res.status(400).send(e)
     }
@@ -29,6 +29,7 @@ router.post('/auth',async (req,res)=>{
 })
 
 router.get('/login',async (req,res)=>{
+    
     res.sendfile('./view/index.html')
 })
 
