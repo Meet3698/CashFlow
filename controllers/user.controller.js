@@ -26,7 +26,7 @@ router.post('/auth',async (req,res)=>{
             console.log(req.body.password);
             
             const user = await User.findByCredentials(req.body.email,req.body.password)
-            res.status(201).json({message : JSON.stringify(user)})
+            res.status(201).send(JSON.stringify(user))
         } catch (e) {
             const err = new Error(e)
             console.log(err.message);
