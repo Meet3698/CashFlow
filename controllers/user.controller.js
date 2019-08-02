@@ -22,8 +22,8 @@ router.post('/add',async (req,res)=>{
 
 router.post('/auth',async (req,res)=>{
         try {
-            console.log(req.body.email);
-            console.log(req.body.password);
+            // console.log(req.body.email);
+            // console.log(req.body.password);
             
             const user = await User.findByCredentials(req.body.email,req.body.password)
             res.status(201).send(JSON.stringify(user))
@@ -38,5 +38,46 @@ router.post('/auth',async (req,res)=>{
 router.get('/login',(req,res)=>{
     res.sendfile('./view/index.html')
 })
+
+
+//--------------------------------------------------------------------------------
+
+router.get('/delete',(req,res)=>{
+    res.sendfile('./view/delete.html')
+})
+
+router.post('/delete',async (req,res)=>{
+    try {
+        const user = await User.findUserById(req.body.email)
+        res.send(user)
+
+    } catch (e) {
+        console.log(e);
+        
+    }
+})
+
+router.get('/deleteAll',async (req,res)=>{
+    const del = await User.deleteMany({})
+    res.send(del)
+})
+
+router.get('/show',async (req,res)=>{
+    try {
+        await User.find({}).then((err,data)=>{
+            if(err){
+                res.send(err)
+            }
+            else{
+                res.send(data)
+            }
+        })
+    } catch (e) {
+        const err = new Error(e)
+        log(err.message)
+    }
+})
+//----------------------------------------------------------------------------------
+
 
 module.exports = router

@@ -14,6 +14,13 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
+UserSchema.statics.findUserById = async (email) => {
+    
+    const del = await User.deleteOne({email:email})
+
+    return del
+}
+
 UserSchema.pre('save',async function(next){
     const user = this
 
