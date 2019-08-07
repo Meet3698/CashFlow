@@ -33,7 +33,7 @@ router.post('/registerotp',async (req,res)=>{
    
     await otp.save()
 
-    const from = 'Nexmo'
+    const from = '918141630915'
     const to = req.body.phone
     const text = rand
     
@@ -47,7 +47,7 @@ router.post('/registerotp',async (req,res)=>{
     //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
     //         }
     //     }
-    // })
+    // })   
     console.log(rand)
     
     res.json({message : true})
@@ -84,17 +84,39 @@ router.post('/loginotp',async (req,res) =>{
   
     const phone = req.body.phone
     console.log(phone)
+    const user = await User.find({phone:phone})
+    console.log(user)
+    if(user!= null)
+    {
+        const rand = Math.trunc(Math.random() * 1000000)
+        console.log(rand)
+        
+        await OTP.update(
+            {phone:phone},
+            {$set : { otp : rand}}
+        )
     
-    const rand = Math.trunc(Math.random() * 1000000)
-    console.log(rand)
+    const from = '918141630915'
+    const to = req.body.phone
+    const text = rand
     
-    await OTP.update(
-        {phone:phone},
-        {$set : { otp : rand}}
-    )
-
-    res.json({message : true})
-
+    // nexmo.message.sendSms(from, to, text, (err, responseData) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         if(responseData.messages[0]['status'] === "0") {
+    //             console.log("Message sent successfully.")
+    //         } else {
+    //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
+    //         }
+    //     }
+    // })   
+        res.json({message : true})
+    }
+    else
+    {
+        res.json({message : false})
+    }
 })
 
 router.get('/delete',(req,res)=>{
