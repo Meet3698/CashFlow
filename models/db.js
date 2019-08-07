@@ -5,3 +5,4 @@ mongoose.connect('mongodb+srv://meet:Meet@3698@anonymous-edqd9.mongodb.net/CarWa
 })
 
 require('./user.model')
+require('./otp.model')

@@ -4,6 +4,7 @@ const express = require('express')
 const port = process.env.PORT || 3000
 const UserController = require('./controllers/user.controller')
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const cors = require('cors')
 const app = express()
 
@@ -11,6 +12,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(cors())
+app.use(session({secret : 'Harry5972',saveUninitialized:true,resave:true}))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -19,6 +21,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/',UserController)
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'html')
 
 // app.use((req,res,next)=>{
 //     console.log(req.method,req.path);
@@ -28,3 +32,5 @@ app.use('/',UserController)
 app.listen(port,()=>{
     console.log("listening on "+port);
 })
+
+module.exports = session
