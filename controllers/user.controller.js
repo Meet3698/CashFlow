@@ -10,6 +10,7 @@ const nexmo = new Nexmo({
 const mongoose = require('mongoose')
 const User = mongoose.model('User') 
 const OTP = mongoose.model('OTP')
+const Car = mongoose.model('Car')
 
 var sess=''
 
@@ -119,6 +120,12 @@ router.post('/loginotp',async (req,res) =>{
     }
 })
 
+router.post('/addcar',async (req,res)=>{
+    const car = new Car(req.body);
+    await car.save()
+})
+
+//---------------------------------------------------------------------------------------------
 router.get('/delete',(req,res)=>{
     sess = req.session
     if(sess.phone){
