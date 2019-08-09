@@ -23,6 +23,8 @@ router.post('/registerotp',async (req,res)=>{
     sess.phone = req.body.phone
 
     const user = new User(req.body)
+    console.log(user);
+    
     await user.save()
    
     const rand = Math.trunc(Math.random() * 1000000)
@@ -165,8 +167,8 @@ router.get('/deleteAll',async (req,res)=>{
 })
 
 router.get('/show',async (req,res)=>{
-    sess = req.session
-    if(sess.phone){
+    // sess = req.session
+    // if(sess.phone){
         try {
             await User.find({}).then((err,data)=>{
                 if(err){
@@ -180,10 +182,10 @@ router.get('/show',async (req,res)=>{
             const err = new Error(e)
             log(err.message)
         }
-    }
-    else{
-        res.json({message : false})
-    }
+    // }
+    // else{
+    //     res.json({message : false})
+    // }
 })
 
 module.exports = router

@@ -1,22 +1,22 @@
 const mongoose = require('mongoose')
 
 const carSchema = new mongoose.Schema({
-    carname : {
+    carName : {
         type : String,
     },
-    nplate : {
+    numberPlate : {
         type : String
     },
-    tpye : {
+    carTpye : {
         type : String
     },
     address : {
         type : String
     },
-    parking_spot : {
+    parkingSpot : {
         type : String
     },
-    time_slot : {
+    timeSlot : {
         type : String
     }
 })
