@@ -6,6 +6,12 @@ const PackageSchema = new mongoose.Schema({
     },
     description : {
         type : String
+    },
+    catagory : {
+        type : String
+    },
+    month : {
+        type : String
     }
 })
 

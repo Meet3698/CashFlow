@@ -4,7 +4,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Brand = mongoose.model('Brand')
 
-router.get('/uv',(req,res)=>{
+router.get('/',(req,res)=>{
     res.sendfile('./view/index.html')
 })
 
