@@ -6,6 +6,8 @@ mongoose.connect('mongodb+srv://meet:Meet@3698@anonymous-edqd9.mongodb.net/CarWa
 
 require('./user.model')
 require('./otp.model')
-require('./vehicle.model')
 require('./userVehicle.model')
 require('./package.model')
+require('./brand.model')
+require('./color.model')
+require('./time.model')

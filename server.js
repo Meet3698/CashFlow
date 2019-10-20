@@ -3,6 +3,9 @@ require('./models/db')
 const express = require('express')
 const port = process.env.PORT || 3000
 const UserController = require('./controllers/user.controller')
+const UserVehicleController = require('./controllers/userVehicle.controller')
+const PackageController = require('./controllers/package.controller')
+
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const cors = require('cors')
@@ -21,6 +24,9 @@ app.use(function(req, res, next) {
 });
 
 app.use('/',UserController)
+app.use('/package',PackageController)
+app.use('/uservehicle',UserVehicleController)
+
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 

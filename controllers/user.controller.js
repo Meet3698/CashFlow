@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const PackageController = require('./package.controller')
+
+
 
 const Nexmo = require('nexmo')
 const nexmo = new Nexmo({
@@ -18,8 +19,6 @@ var sess=''
 // router.get('/',(req,res)=>{
 //     res.sendfile('./view/index.html')
 // })
-
-router.use('/package',PackageController)
 
 router.post('/registerotp',async (req,res)=>{
     sess = req.session
