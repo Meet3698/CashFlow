@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserVehicleSchema = new mongoose.Schema({
+const VehicleSchema = new mongoose.Schema({
     type : {
         type : String,
     },
@@ -21,4 +21,4 @@ const UserVehicleSchema = new mongoose.Schema({
     }
 })
 
-mongoose.model('Vehicle',UserVehicleSchema)
+mongoose.model('Vehicle',VehicleSchema)

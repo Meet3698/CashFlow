@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserVehicle = new mongoose.Schema({
+const UserVehicleSchema = new mongoose.Schema({
     phone : {
        type : String,
        unique : true
@@ -38,4 +38,4 @@ const UserVehicle = new mongoose.Schema({
     }
 })
 
-mongoose.model('UserVehicle',UserVehicle)
+mongoose.model('UserVehicle',UserVehicleSchema)
