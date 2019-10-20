@@ -10,12 +10,11 @@ const nexmo = new Nexmo({
 const mongoose = require('mongoose')
 const User = mongoose.model('User') 
 const OTP = mongoose.model('OTP')
-const Car = mongoose.model('Car')
 
 var sess=''
 
 // router.get('/',(req,res)=>{
-//     res.jsonfile('./view/index.html')
+//     res.sendfile('./view/index.html')
 // })
 
 router.post('/registerotp',async (req,res)=>{
@@ -23,10 +22,8 @@ router.post('/registerotp',async (req,res)=>{
     sess.phone = req.body.phone
 
     const user = new User(req.body)
-    console.log(user);
-    
     await user.save()
-   
+
     const rand = Math.trunc(Math.random() * 1000000)
     
     const otp = new OTP({
@@ -120,11 +117,6 @@ router.post('/loginotp',async (req,res) =>{
     {
         res.json({message : false})
     }
-})
-
-router.post('/addcar',async (req,res)=>{
-    const car = new Car(req.body);
-    await car.save()
 })
 
 //---------------------------------------------------------------------------------------------

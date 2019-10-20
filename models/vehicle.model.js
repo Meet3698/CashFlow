@@ -1,24 +1,24 @@
 const mongoose = require('mongoose')
 
-const carSchema = new mongoose.Schema({
-    carName : {
+const UserVehicleSchema = new mongoose.Schema({
+    type : {
         type : String,
     },
-    numberPlate : {
+    brand : {
         type : String
     },
-    carTpye : {
+    model : {
         type : String
     },
-    address : {
+    catagory : {
         type : String
     },
-    parkingSpot : {
+    fuelType : {
         type : String
     },
-    timeSlot : {
+    color : {
         type : String
     }
 })
 
-mongoose.model('Car',carSchema)
+mongoose.model('Vehicle',UserVehicleSchema)
