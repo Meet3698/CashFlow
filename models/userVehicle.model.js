@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const UserVehicleSchema = new mongoose.Schema({
     phone : {
        type : String,
-       unique : true
     },
     type : {
         type : String,
