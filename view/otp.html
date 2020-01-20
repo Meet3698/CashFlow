@@ -4,9 +4,9 @@
     </head>
 
     <body>
-        <form action="/verify" method="post">
-        OTP : <input type="number" name="otp"><br>
-        <input type="hidden" name="phone" value = "<%=phone%>">
+        <form action="/registerotp" method="post">
+        OTP : <input type="string" name="otp"><br>
+        <input type="hidden" name="email" value = "<%=email%>">
         <input type="submit" name="submit" value="Send OTP">
         </form>
     </body>

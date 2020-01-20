@@ -7,8 +7,10 @@ const path   = require('path');
 const mongoose = require('mongoose')
 const Image = mongoose.model('Image')
 
+router.use(express.static('public'))
+
 const storage = multer.diskStorage({
-    destination: './images',
+    destination: './public',
     filename: function(req, file, fn){
       fn(null,  new Date().getTime().toString()+'-'+file.fieldname+path.extname(file.originalname));
     }
@@ -45,7 +47,6 @@ router.post('/upload',(req, res)=>{
         {
             res.send(error)
         }
-
         const document = {
             name : req.file.filename
         };
