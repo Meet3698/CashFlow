@@ -7,6 +7,8 @@ const path   = require('path');
 const mongoose = require('mongoose')
 const Image = mongoose.model('Image')
 
+router.use(express.static('public'));
+
 const storage = multer.diskStorage({
     destination: './public',
     filename: function(req, file, fn){
