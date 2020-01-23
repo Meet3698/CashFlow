@@ -42,7 +42,21 @@ router.post('/registerotp',async(req,res)=>{
         from: 'm3et6041@gmail.com',
         subject: 'OTP',
         text: rand.toString()
-        })
+        }).then(
+            (err, responseData) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        if(responseData.messages[0]['status'] === "0") {
+                            console.log("Message sent successfully.")
+                        } else {
+                            console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
+                        }
+                    }
+                )   
+                console.log(rand)
+                
+                res.json({message : true})
 })
 
 // router.post('/registerotp',async (req,res)=>{
