@@ -53,7 +53,7 @@ router.post('/registerotp',async(req,res)=>{
                             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
                         }
                     }
-                )   
+            })   
                 console.log(rand)
                 
                 res.json({message : true})
@@ -125,9 +125,10 @@ router.get('/login',(req,res)=>{
 router.post('/loginotp',async (req,res) =>{
   
     const email = req.body.email
-    console.log(phone)
+    console.log(email)
     const user = await User.find({email:email})
     console.log(user)
+
     if(user!= null)
     {
         const rand = Math.trunc(Math.random() * 1000000)
@@ -137,10 +138,6 @@ router.post('/loginotp',async (req,res) =>{
             {email:email},
             {$set : { otp : rand}}
         )
-    
-    const from = '918141630915'
-    const to = req.body.phone
-    const text = rand
     
     const otp = new OTP({
         email : req.body.email,
