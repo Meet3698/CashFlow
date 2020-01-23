@@ -172,6 +172,7 @@ router.post('/loginotp',async (req,res) =>{
 })
     
 //---------------------------------------------------------------------------------------------
+
 router.get('/delete',(req,res)=>{
     sess = req.session
     if(sess.phone){
@@ -214,13 +215,13 @@ router.get('/show',async (req,res)=>{
     // sess = req.session
     // if(sess.phone){
         try {
-            await User.find({}).then((err,data)=>{
+             User.find({}).then((err,data)=>{
                 if(err){
                     res.json(err)
                 }
                 else{
                     res.json(data)
-                }
+              await  }
             })
         } catch (e) {
             const err = new Error(e)

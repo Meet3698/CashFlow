@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const UserVehicleSchema = new mongoose.Schema({
-    phone : {
+    email : {
        type : String,
     },
     type : {
@@ -19,15 +19,6 @@ const UserVehicleSchema = new mongoose.Schema({
     number : {
         type : String,
         unique : true
-    },
-    fuelType : {
-         type : String
-    },
-    color : {
-        type : String
-    },
-    parkingLotNo : {
-        type : Number
     },
     parkingArea : {
         type : String
