@@ -20,17 +20,12 @@ router.get('/find',(req,res)=>{
     res.sendfile('./view/index.html')
 })
 
-router.post('/findModel',async (req,res)=> {
+router.post('/findModel',(req,res)=> {
     const brand = req.body.brand
     const category = req.body.catagory
-
-    Brand.find({brandName:brand,vehicleCatagory:category}).then((err,data)=>{
-        if(err){
-            res.json(err)
-        }
-        else{
-            res.json(data)
-      await  }
+    
+    Brand.find({brandName:brand,vehicleCatagory:category}).then((data)=>{
+        res.send(data)
     })
 })
 
