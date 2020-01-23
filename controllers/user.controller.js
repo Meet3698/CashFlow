@@ -82,71 +82,84 @@ router.post('/registerotp',async(req,res)=>{
     
 // })
 
-// router.post('/verify',async(req,res)=>{ 
-//     const phone = req.body.phone
-//     console.log(phone)
+router.post('/verify',async(req,res)=>{ 
+    const email = req.body.email
+    console.log(email)
     
-//     const otp = await OTP.findOne({phone})
+    const otp = await OTP.findOne({email})
 
-//     console.log(otp.otp)
-//     console.log(otp)
+    console.log(otp.otp)
+    console.log(otp)
     
-//     if(otp.otp == req.body.otp)
-//     {
-//         res.json({message : true})
-//     }
-//     else
-//     {
-//         res.json({message : false})
-//     }
+    if(otp.otp == req.body.otp)
+    {
+        res.json({message : true})
+    }
+    else
+    {
+        res.json({message : false})
+    }
 
-// })
+})
 
-// router.get('/login',(req,res)=>{
+router.get('/login',(req,res)=>{
 
-//     res.jsonfile('./view/login.html')
+    res.jsonfile('./view/login.html')
 
-// })
+})
 
-// router.post('/loginotp',async (req,res) =>{
+router.post('/loginotp',async (req,res) =>{
   
-//     const phone = req.body.phone
-//     console.log(phone)
-//     const user = await User.find({phone:phone})
-//     console.log(user)
-//     if(user!= null)
-//     {
-//         const rand = Math.trunc(Math.random() * 1000000)
-//         console.log(rand)
+    const email = req.body.email
+    console.log(phone)
+    const user = await User.find({email:email})
+    console.log(user)
+    if(user!= null)
+    {
+        const rand = Math.trunc(Math.random() * 1000000)
+        console.log(rand)
         
-//         await OTP.update(
-//             {phone:phone},
-//             {$set : { otp : rand}}
-//         )
+        await OTP.update(
+            {email:email},
+            {$set : { otp : rand}}
+        )
     
-//     const from = '918141630915'
-//     const to = req.body.phone
-//     const text = rand
+    const from = '918141630915'
+    const to = req.body.phone
+    const text = rand
     
-    // nexmo.message.sendSms(from, to, text, (err, responseData) => {
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         if(responseData.messages[0]['status'] === "0") {
-    //             console.log("Message sent successfully.")
-    //         } else {
-    //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
-    //         }
-    //     }
-    // })   
-//         res.json({message : true})
-//     }
-//     else
-//     {
-//         res.json({message : false})
-//     }
-// })
+    const otp = new OTP({
+        email : req.body.email,
+        otp : rand
+     })
+    
+    await otp.save()
 
+    sgMail.send({
+    to: req.body.email,  
+    from: 'm3et6041@gmail.com',
+    subject: 'OTP',
+    text: rand.toString()
+    }).then(
+        (err,responseData) => {
+            if (err) {
+                console.log(err)
+            } else {
+                if(responseData.messages[0]['status'] === "0") {
+                    console.log("Message sent successfully.")
+                } else {
+                    console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
+                }
+            }
+        })
+        res.json({message : true})
+    }
+    else
+    {
+        res.json({message : false})
+    }
+})
+    
 //---------------------------------------------------------------------------------------------
 router.get('/delete',(req,res)=>{
     sess = req.session
