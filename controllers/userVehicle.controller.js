@@ -24,8 +24,15 @@ router.post('/findModel',(req,res)=> {
     const brand = req.body.brand
     const category = req.body.catagory
     
-    Brand.find({brandName:brand,vehicleCatagory:category}).then((data)=>{
-        res.json(data)
+    const model = Brand.find({brandName:brand,vehicleCatagory:category},(err,data)=>{
+        // console.log(data);
+        const arr = []
+
+        for(i=0;i<data.length;i++)
+        {
+            arr.push(data[i].vehicleModel) 
+        }
+        res.json({list : arr})   
     })
 })
 
