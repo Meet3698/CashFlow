@@ -25,7 +25,7 @@ router.post('/findModel',(req,res)=> {
     const category = req.body.catagory
     
     Brand.find({brandName:brand,vehicleCatagory:category}).then((data)=>{
-        res.send(data)
+        res.json(data)
     })
 })
 
