@@ -18,7 +18,7 @@ const OTP = mongoose.model('OTP')
 var sess=''
 
 router.get('/',(req,res )=>{
-    res.sendfile('./view/index.html')
+    res.sendfile('./view/verify.html')
 })
 
 router.post('/registerotp',async(req,res)=>{
@@ -32,11 +32,11 @@ router.post('/registerotp',async(req,res)=>{
         {
             if(err.keyPattern.email == 1)
             {
-                res.send({message : 0})
+                res.json({message : 0})
             }  
             if(err.keyPattern.phone == 1)
             {
-                res.send({message : 1})
+                res.json({message : 1})
             }
         }
         else{
@@ -58,47 +58,10 @@ router.post('/registerotp',async(req,res)=>{
                 
                     console.log(rand)
                     
-                    res.send({message : 2})
+                    res.json({message : 2})
             }
     })
 })
-
-// router.post('/registerotp',async (req,res)=>{
-//     sess = req.session
-//     sess.phone = req.body.phone
-
-//     const user = new User(req.body)
-//     await user.save()
-
-//     const rand = Math.trunc(Math.random() * 1000000)
-    
-//     const otp = new OTP({
-//        phone : req.body.phone,
-//        otp : rand
-//     })
-   
-//     await otp.save()
-
-//     const from = '918141630915'
-//     const to = req.body.phone
-//     const text = rand
-    
-    // nexmo.message.sendSms(from, to, text, (err, responseData) => {
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         if(responseData.messages[0]['status'] === "0") {
-    //             console.log("Message sent successfully.")
-    //         } else {
-    //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
-    //         }
-    //     }
-    // })   
-//     console.log(rand)
-    
-//     res.json({message : true})
-    
-// })
 
 router.post('/verify',async(req,res)=>{ 
     const email = req.body.email
@@ -120,12 +83,6 @@ router.post('/verify',async(req,res)=>{
 
 })
 
-router.get('/login',(req,res)=>{
-
-    res.jsonfile('./view/login.html')
-
-})
-
 router.post('/loginotp',async (req,res) =>{
   
     const email = req.body.email
@@ -142,13 +99,6 @@ router.post('/loginotp',async (req,res) =>{
             {email:email},
             {$set : { otp : rand}}
         )
-    
-    const otp = new OTP({
-        email : req.body.email,
-        otp : rand
-     })
-    
-    await otp.save()
 
     sgMail.send({
     to: req.body.email,  
@@ -226,5 +176,42 @@ router.get('/show',async (req,res)=>{
     //     res.json({message : false})
     // }
 })
+
+// router.post('/registerotp',async (req,res)=>{
+//     sess = req.session
+//     sess.phone = req.body.phone
+
+//     const user = new User(req.body)
+//     await user.save()
+
+//     const rand = Math.trunc(Math.random() * 1000000)
+    
+//     const otp = new OTP({
+//        phone : req.body.phone,
+//        otp : rand
+//     })
+   
+//     await otp.save()
+
+//     const from = '918141630915'
+//     const to = req.body.phone
+//     const text = rand
+    
+    // nexmo.message.sendSms(from, to, text, (err, responseData) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         if(responseData.messages[0]['status'] === "0") {
+    //             console.log("Message sent successfully.")
+    //         } else {
+    //             console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`)
+    //         }
+    //     }
+    // })   
+//     console.log(rand)
+    
+//     res.json({message : true})
+    
+// })
 
 module.exports = router
