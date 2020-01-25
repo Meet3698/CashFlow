@@ -12,8 +12,6 @@ router.get('/',(req,res)=>{
 router.post('/addvehicle',async (req,res)=>{
     const UserVehicle = new UserVehicle(req.body)
     await UserVehicle.save()
-
-    res.send("ok")
 })
 
 router.get('/find',(req,res)=>{
@@ -32,7 +30,7 @@ router.post('/findModel',(req,res)=> {
         {
             arr.push(data[i].vehicleModel) 
         }
-        res.json({list : arr})   
+        res.send({list : arr})   
     })
 })
 

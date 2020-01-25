@@ -18,9 +18,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.statics.findUserById = async (phone) => {
-    
     const del = await User.deleteOne({phone:phone})
-
     return del
 }
 

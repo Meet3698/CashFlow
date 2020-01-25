@@ -18,7 +18,7 @@ const OTP = mongoose.model('OTP')
 var sess=''
 
 router.get('/',(req,res )=>{
-    res.sendfile('./view/redirect.html')
+    res.sendfile('./view/index.html')
 })
 
 router.post('/registerotp',async(req,res)=>{
@@ -26,27 +26,41 @@ router.post('/registerotp',async(req,res)=>{
     sess.email = req.body.email
 
     const user = new User(req.body)
-    await user.save()
 
-    const rand = Math.trunc(Math.random() * 1000000)
+    await user.save(async(err)=>{
+        if(err)
+        {
+            if(err.keyPattern.email == 1)
+            {
+                res.send({message : 0})
+            }  
+            if(err.keyPattern.phone == 1)
+            {
+                res.send({message : 1})
+            }
+        }
+        else{
+                const rand = Math.trunc(Math.random() * 1000000)
 
-    const otp = new OTP({
-               email : req.body.email,
-               otp : rand
-            })
-           
-            await otp.save()
+                const otp = new OTP({
+                        email : req.body.email,
+                        otp : rand
+                        })
+                    
+                        await otp.save()
 
-    sgMail.send({
-        to: req.body.email,  
-        from: 'm3et6041@gmail.com',
-        subject: 'OTP',
-        text: rand.toString()
-        })   
-      
-        console.log(rand)
-        
-        res.json({message : true})
+                sgMail.send({
+                    to: req.body.email,  
+                    from: 'm3et6041@gmail.com',
+                    subject: 'OTP',
+                    text: rand.toString()
+                    })   
+                
+                    console.log(rand)
+                    
+                    res.send({message : 2})
+            }
+    })
 })
 
 // router.post('/registerotp',async (req,res)=>{
