@@ -5,23 +5,21 @@ const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 
 
-router.post('/add',async (req,res)=>{
-    const service = new Service(req.body[0])
-    console.log(req.body);
-    
-    await service.save(async(err)=>{
-        if(err)
-        {
-            if(err.keyPattern.number == 1)
+router.post('/add',(req,res)=>{
+    const service = new Service(req.body)
+    service.forEach(item=>{
+        console.log(item);
+        item.save(async(err)=>{
+            if(err)
             {
-                res.json({message : 0})
-            }  
-        }
-        else
-        {
-            res.json({message : 1})
-        }
-    })
+                if(err.keyPattern.number == 1)
+                {
+                    res.json({message : 0})
+                }  
+            }
+        })
+        })
+        res.json({message : 1})
 })
 
 router.get('/show',async(req,res)=>{
