@@ -6,10 +6,11 @@ const Service = mongoose.model('Service')
 
 
 router.post('/add',(req,res)=>{
-    const service = new Service(req.body)
+    const service = req.body
     service.forEach(item=>{
         console.log(item);
-        item.save(async(err)=>{
+        const serv = new Service(item)
+        serv.save(async(err)=>{
             if(err)
             {
                 if(err.keyPattern.number == 1)
