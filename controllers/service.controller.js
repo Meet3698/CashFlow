@@ -15,7 +15,7 @@ router.post('/add',(req,res)=>{
             {
                 if(err.keyPattern.number == 1)
                 {
-                    res.send({message : 0})
+                    return res.send({message : 0})
                 }  
             }
         })
