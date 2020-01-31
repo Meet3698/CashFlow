@@ -15,12 +15,12 @@ router.post('/add',(req,res)=>{
             {
                 if(err.keyPattern.number == 1)
                 {
-                    res.json({message : 0})
+                    res.send({message : 0})
                 }  
             }
         })
         })
-        res.json({message : 1})
+        res.send({message : 1})
 })
 
 router.get('/show',async(req,res)=>{
