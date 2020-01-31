@@ -4,6 +4,24 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 
+
+router.post('/add',async (req,res)=>{
+    const service = new Service(req.body)
+    await service.save(async(err)=>{
+        if(err)
+        {
+            if(err.keyPattern.number == 1)
+            {
+                res.json({message : 0})
+            }  
+        }
+        else
+        {
+            res.json({message : 1})
+        }
+    })
+})
+
 router.get('/show',async(req,res)=>{
     try {
         Service.find({}).then((err,data)=>{
