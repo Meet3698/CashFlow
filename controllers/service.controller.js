@@ -6,7 +6,7 @@ const Service = mongoose.model('Service')
 
 
 router.post('/add',async (req,res)=>{
-    const service = new Service(req.body)
+    const service = new Service(req.body[0])
     console.log(req.body);
     
     await service.save(async(err)=>{
