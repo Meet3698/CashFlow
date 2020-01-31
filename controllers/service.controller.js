@@ -11,6 +11,7 @@ router.post('/add',(req,res)=>{
         console.log(item);
         const serv = new Service(item)
         serv.save((err)=>{
+            console.log(err);
             if(err)
             {
                 if(err.keyPattern.number == 1)
