@@ -5,12 +5,11 @@ const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 
 
-router.post('/add',(req,res)=>{
+router.post('/add',async(req,res)=>{
     const service = req.body
-    service.forEach(item=>{
-        console.log(item);
+    service.forEach(async (item)=>{
         const serv = new Service(item)
-        serv.save((err)=>{
+        await serv.save((err)=>{
             console.log(err);
             if(err)
             {
