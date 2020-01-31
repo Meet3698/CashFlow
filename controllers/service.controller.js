@@ -10,7 +10,7 @@ router.post('/add',(req,res)=>{
     service.forEach(item=>{
         console.log(item);
         const serv = new Service(item)
-        serv.save(async(err)=>{
+        serv.save((err)=>{
             if(err)
             {
                 if(err.keyPattern.number == 1)
