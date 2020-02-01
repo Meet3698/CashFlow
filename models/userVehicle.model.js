@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const UserVehicleSchema = new mongoose.Schema({
     email : {
        type : String,
+       unique: true
     },
     type : {
         type : String,
