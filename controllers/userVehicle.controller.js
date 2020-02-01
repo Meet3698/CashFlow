@@ -14,11 +14,13 @@ router.post('/addvehicle',async (req,res)=>{
     await uservehicle.save((err)=>{
         if(err)
         {
+            console.log(err);
             res.json({message : false})
         }
         else
         {
-            res.send({message : true})
+            console.log("lol");
+            res.json({message : true})
         }
     })
 })
