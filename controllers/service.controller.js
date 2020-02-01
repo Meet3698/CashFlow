@@ -9,15 +9,16 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/add',async(req,res)=>{
-    const service = new Service(req.body)
-    await service.save((err)=>{
+ 
+    const service = req.body
+    Service.collection.insertMany(service,(err,data)=>{
         if(err)
         {
-            res.json({message:0})
+           res.send(err)
         }
         else
         {
-            res.json({message:1})
+            res.send({message:1})
         }
     })
 })
