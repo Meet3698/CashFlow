@@ -14,17 +14,27 @@ router.post('/find',(req,res)=>{
 
     UserVehicle.find({email:email},async(err,data)=>{
         const arr = []
-        for(i=0;i<data.length;i++)
+        for(let i=0;i<data.length;i++)
         {
-            await Service.find({number:data[i].number},(err,result)=>{
+            await Service.find({number:data[i].number},async(err,result)=>{
                 if(Object.keys(result).length===0)
                 {
-                    console.log(data[i]);
                     arr.push(data[i].model)
+                    if(i==data.length-1)
+                    {
+                        res.send({list : arr})
+                    }
+                }
+                else
+                {
+                    if(i==data.length-1)
+                    {
+                        res.send({list : arr})
+                    }
                 }
             })
-        }
-        res.send({list : arr})         
+        
+        }         
     })
 })
 
