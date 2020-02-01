@@ -8,29 +8,17 @@ router.get('/',(req,res)=>{
     res.sendfile('./view/index.html')
 })
 
-router.post('/add',(req,res)=>{
-    const item = []
-    const len = item.length
-    let cnt = 0
-    item.push(req.body)
-    console.log(item);
-    
-    item.forEach(element => {
-        const service = new Service(element)
-        service.save((err)=>{
-            if(err)
-            {
-                res.send({message:0})
-            }
-            else if(cnt<len)
-            {
-                cnt = cnt + 1
-            }
-            else
-            {
-                res.send({message:1})
-            }
-        })
+router.post('/add',async(req,res)=>{
+    const service = new Service(req.body)
+    await service.save((err)=>{
+        if(err)
+        {
+            res.json({message:0})
+        }
+        else
+        {
+            res.json({message:1})
+        }
     })
 })
 
