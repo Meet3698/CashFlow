@@ -10,8 +10,8 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/addvehicle',async (req,res)=>{
-    const uservehicle = new UserVehicle(req.body)
-    await uservehicle.save((err)=>{
+    const userVehicle = req.body
+    UserVehicle.collection.insertMany(userVehicle,(err,data)=>{
         if(err)
         {
             if(err.keyPattern.number == 1)
