@@ -11,8 +11,15 @@ router.get('/',(req,res)=>{
 
 router.post('/addvehicle',async (req,res)=>{
     const Uservehicle = new UserVehicle(req.body)
-    await Uservehicle.save().then((data)=>{
-        res.json({message : true})
+    await Uservehicle.save((err)=>{
+        if(err)
+        {
+            res.json({message : false})
+        }
+        else
+        {
+            res.send({message : true})
+        }
     })
 })
 
