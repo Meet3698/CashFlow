@@ -16,7 +16,7 @@ router.post('/addvehicle',async (req,res)=>{
     await userVehicle.save((err)=>{
         if(err)
         {
-            if(err.keyPattern.email == 1)
+            if(err.keyPattern.number == 1)
             res.json({message : false})
         }
         else

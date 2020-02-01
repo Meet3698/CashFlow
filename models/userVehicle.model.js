@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const UserVehicleSchema = new mongoose.Schema({
     email : {
        type : String,
-       unique: true
     },
     type : {
         type : String,
@@ -19,6 +18,7 @@ const UserVehicleSchema = new mongoose.Schema({
     },
     number : {
         type : String,
+        unique : true
     },
     longitude : {
         type : String
