@@ -26,6 +26,9 @@ const UserVehicleSchema = new mongoose.Schema({
     latitude : {
         type : String
     },
+    parkingarea : {
+        type : String
+    },
     preferredTime : {
         type : String
     }
