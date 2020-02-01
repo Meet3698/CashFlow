@@ -4,23 +4,34 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 
+router.get('/',(req,res)=>{
+    res.sendfile('./view/index.html')
+})
 
-router.post('/add',async(req,res)=>{
-    const service = req.body
-    service.forEach(async (item)=>{
-        const serv = new Service(item)
-        await serv.save((err)=>{
-            console.log(err);
+router.post('/add',(req,res)=>{
+    const item = []
+    const len = item.length
+    let cnt = 0
+    item.push(req.body)
+    console.log(item);
+    
+    item.forEach(element => {
+        const service = new Service(element)
+        service.save((err)=>{
             if(err)
             {
-                if(err.keyPattern.number == 1)
-                {
-                    return res.send({message : 0})
-                }  
+                res.send({message:0})
+            }
+            else if(cnt<len)
+            {
+                cnt = cnt + 1
+            }
+            else
+            {
+                res.send({message:1})
             }
         })
-        })
-        res.send({message : 1})
+    })
 })
 
 router.get('/show',async(req,res)=>{
