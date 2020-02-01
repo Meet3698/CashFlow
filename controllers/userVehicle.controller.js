@@ -10,16 +10,17 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/addvehicle',async (req,res)=>{
-    const userVehicle = req.body
-    UserVehicle.collection.insert(userVehicle,(err,data)=>{
+    console.log(req.body);
+    
+    const userVehicle = new UserVehicle(req.body)
+    await userVehicle.save((err)=>{
         if(err)
         {
-            if(err.keyPattern.number == 1)
+            if(err.keyPattern.email == 1)
             res.json({message : false})
         }
         else
         {
-            console.log("lol");
             res.json({message : true})
         }
     })
