@@ -34,7 +34,7 @@ router.post('/findModel',(req,res)=> {
     const brand = req.body.brand
     const category = req.body.catagory
     
-    const model = Brand.find({brandName:brand,vehicleCatagory:category},(err,data)=>{
+    Brand.find({brandName:brand,vehicleCatagory:category},(err,data)=>{
         // console.log(data);
         const arr = []
 
