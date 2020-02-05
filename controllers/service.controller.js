@@ -12,30 +12,43 @@ router.get('/',(req,res)=>{
 router.post('/find',(req,res)=>{
     const email = req.body.email
 
-    UserVehicle.find({email:email},async(err,data)=>{
-        const arr = []
-        for(let i=0;i<data.length;i++)
-        {
-            await Service.find({number:data[i].number},async(err,result)=>{
-                if(Object.keys(result).length===0)
+    UserVehicle.collection.find({email:email}).toArray().then((result)=>{
+        const list = result.map((item)=>{
+            Service.find({number:item.number},async(err,data)=>{
+                if(Object.keys(data).length===0)
                 {
-                    arr.push(data[i].model)
-                    if(i==data.length-1)
-                    {
-                        res.send({list : arr})
-                    }
-                }
-                else
-                {
-                    if(i==data.length-1)
-                    {
-                        res.send({list : arr})
-                    }
+                    return data.model
                 }
             })
+        })
+        console.log(list);
         
-        }         
+        res.json({list:list})
     })
+    // UserVehicle.find({email:email},async(err,data)=>{
+    //     const arr = []
+    //     for(let i=0;i<data.length;i++)
+    //     {
+    //         await Service.find({number:data[i].number},async(err,result)=>{
+    //             if(Object.keys(result).length===0)
+    //             {
+    //                 arr.push(data[i].model)
+    //                 if(i==data.length-1)
+    //                 {
+    //                     res.send({list : arr})
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 if(i==data.length-1)
+    //                 {
+    //                     res.send({list : arr})
+    //                 }
+    //             }
+    //         })
+        
+    //     }         
+    // })
 })
 
 router.post('/add',async(req,res)=>{
