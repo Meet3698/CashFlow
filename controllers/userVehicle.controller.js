@@ -35,8 +35,10 @@ router.post('/findModel',(req,res)=> {
     const category = req.body.catagory
     
     const arr = Brand.collection.find({brandName:brand,vehicleCatagory:category}).toArray()
-    const list = []
-    arr.map(list.push(arr.vehicleModel));
+
+    var list = Array.prototype.map.call(arr, function(item) { 
+        return item 
+    }) 
     console.log(list);
     
 })
