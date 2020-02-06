@@ -5,26 +5,42 @@ const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const UserVehicle = mongoose.model('UserVehicle')
 
-router.get('/',(req,res)=>{
+router.get('/',async(req,res)=>{
     res.sendfile('./view/delete.html')
 })
 
 router.post('/find',(req,res)=>{
-    const email = req.body.email
 
-    UserVehicle.collection.find({email:email}).toArray().then((result)=>{
-        const list = result.map((item)=>{
-            Service.find({number:item.number},async(err,data)=>{
-                if(Object.keys(data).length===0)
-                {
-                    return data.model
-                }
-            })
-        })
-        console.log(list);
+    const email = req.body.email
+    let model = []
+
+    function myfun(model) {
+        res.send(model)
+      }
+
+    const list = async(email)=>{
         
-        res.json({list:list})
-    })
+        await UserVehicle.collection.find({email:email}).toArray().then((result)=>{
+            result.map(async(item)=>{
+                await Service.collection.find({number:item.number}).toArray().then((data)=>{
+                    if(Object.keys(data).length===0)
+                    {
+                        model.push(item.model)
+                    }
+                })
+                console.log(model);
+            })
+        })  
+        console.log(model)
+    }
+    
+    list(email)
+      
+    // }).then((err)=>{
+    //     console.log(err);
+    // }).catch((er)=>{
+    //     console.log(er);  
+    // })
     // UserVehicle.find({email:email},async(err,data)=>{
     //     const arr = []
     //     for(let i=0;i<data.length;i++)
