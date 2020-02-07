@@ -1,26 +1,29 @@
 const mongoose = require('mongoose')
 
 const ServiceSchema = new mongoose.Schema({
+    serviceName : {
+        type : String
+    },
     number : {
         type : String,
         unique : true
     },
-    serviceName : {
-        type : String
-    },
-    timeCost : {
-        type : String
-    },
-    vehicleType : {
+    briefdetail : {
         type : String
     },
     details : {
         type : String
     },
+    timeCost : {
+        type : String
+    },
     price : {
         type : Number
     },
-    validTime : {
+    duration : {
+        type : String
+    },
+    vehicleType : {
         type : String
     }
 })

@@ -9,62 +9,25 @@ router.get('/',async(req,res)=>{
     res.sendfile('./view/delete.html')
 })
 
-router.post('/find',(req,res)=>{
+router.post('/find',async(req,res)=>{
 
     const email = req.body.email
     let model = []
-
-    function myfun(model) {
-        res.send(model)
-      }
-
-    const list = async(email)=>{
-        
-        await UserVehicle.collection.find({email:email}).toArray().then((result)=>{
-            result.map(async(item)=>{
-                await Service.collection.find({number:item.number}).toArray().then((data)=>{
-                    if(Object.keys(data).length===0)
-                    {
-                        model.push(item.model)
-                    }
-                })
-                console.log(model);
-            })
-        })  
-        console.log(model)
-    }
     
-    list(email)
-      
-    // }).then((err)=>{
-    //     console.log(err);
-    // }).catch((er)=>{
-    //     console.log(er);  
-    // })
-    // UserVehicle.find({email:email},async(err,data)=>{
-    //     const arr = []
-    //     for(let i=0;i<data.length;i++)
-    //     {
-    //         await Service.find({number:data[i].number},async(err,result)=>{
-    //             if(Object.keys(result).length===0)
-    //             {
-    //                 arr.push(data[i].model)
-    //                 if(i==data.length-1)
-    //                 {
-    //                     res.send({list : arr})
-    //                 }
-    //             }
-    //             else
-    //             {
-    //                 if(i==data.length-1)
-    //                 {
-    //                     res.send({list : arr})
-    //                 }
-    //             }
-    //         })
+    const vehicle = await UserVehicle.collection.find({email:email}).toArray()
+    const arr = vehicle.map(async item => {
+        const data = await Service.collection.find({number:item.number}).toArray()
         
-    //     }         
-    // })
+        if(Object.keys(data).length!=0)
+        {
+            model.push(item.model)
+            return model
+        }
+    })
+
+    const result = await Promise.all(arr)
+    const resp = result.filter((item)=>{return item})    
+    res.json({list:resp})
 })
 
 router.post('/add',async(req,res)=>{
