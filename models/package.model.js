@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const PackageSchema = new mongoose.Schema({
+    id : {
+        type : Number
+    },
     price : {
         type : Number
     },

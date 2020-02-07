@@ -7,7 +7,7 @@ const router = express.Router()
 //   apiSecret: 'PnSzEghASz0JmJP5',
 // },{debug:true})
 
-const sgKey="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"
+const sgKey="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"
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(sgKey);
 
@@ -39,27 +39,28 @@ router.post('/registerotp',async(req,res)=>{
                 res.json({message : 1})
             }
         }
-        else{
-                const rand = Math.trunc(Math.random() * 1000000)
+        else
+        {
+            const rand = Math.trunc(Math.random() * 1000000)
 
-                const otp = new OTP({
-                        email : req.body.email,
-                        otp : rand
-                        })
-                    
-                        await otp.save()
-
-                sgMail.send({
-                    to: req.body.email,  
-                    from: 'm3et6041@gmail.com',
-                    subject: 'OTP',
-                    text: rand.toString()
-                    })   
+            const otp = new OTP({
+                    email : req.body.email,
+                    otp : rand
+                    })
                 
-                    console.log(rand)
-                    
-                    res.json({message : 2})
-            }
+                    await otp.save()
+
+            sgMail.send({
+                to: req.body.email,  
+                from: 'm3et6041@gmail.com',
+                subject: 'OTP',
+                text: rand.toString()
+                })   
+            
+                console.log(rand)
+                
+                res.json({message : 2})
+        }
     })
 })
 
