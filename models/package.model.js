@@ -4,8 +4,14 @@ const PackageSchema = new mongoose.Schema({
     id : {
         type : Number
     },
+    name : {
+        type : String
+    },
     price : {
         type : Number
+    },
+    details: {
+        type : String
     },
     description : {
         type : String
@@ -13,8 +19,11 @@ const PackageSchema = new mongoose.Schema({
     catagory : {
         type : String
     },
-    month : {
+    duration : {
         type : String
+    },
+    timeCost : {
+        type : Number
     }
 })
 
