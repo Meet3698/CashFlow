@@ -12,6 +12,7 @@ router.get('/',async(req,res)=>{
 router.post('/find',async(req,res)=>{
 
     const email = req.body.email
+    const catagory = req.body.vehicleCatagory
     let model = []
     
     const vehicle = await UserVehicle.collection.find({email:email}).toArray()
@@ -20,8 +21,11 @@ router.post('/find',async(req,res)=>{
         
         if(Object.keys(data).length!=0)
         {
-            model.push(item.model)
-            return model
+            if(catagory == data.vehicleCatagory)
+            {
+                model.push(item.model)
+                return model
+            }
         }
     })
 

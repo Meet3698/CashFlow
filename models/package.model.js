@@ -16,7 +16,10 @@ const PackageSchema = new mongoose.Schema({
     description : {
         type : String
     },
-    catagory : {
+    vehicleCatagory : {
+        type : String
+    },
+    vehicleType : {
         type : String
     },
     duration : {
