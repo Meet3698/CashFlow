@@ -30,7 +30,8 @@ router.post('/find',async(req,res)=>{
     })
 
     const result = await Promise.all(arr)
-    const resp = result.filter((item)=>{return item})    
+    const resp = result.filter((item)=>{return item})  
+    console.log(resp);
     res.json({list:resp})
 })
 
