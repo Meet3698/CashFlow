@@ -10,29 +10,27 @@ router.get('/',async(req,res)=>{
 })
 
 router.post('/find',async(req,res)=>{
-    console.log(req.body);
     const email = req.body.email
     const catagory = req.body.vehicleCatagory
     let model = []
     
     const vehicle = await UserVehicle.collection.find({email:email}).toArray()
-    const arr = vehicle.map(async item => {
-    const data = await Service.collection.find({number:item.number}).toArray()    
-        if(Object.keys(data).length!=0)
-        {
-            console.log(item.model,item.catagory);
-            
-            if(catagory == item.catagory)
-            {
-                model.push(item.model)
-                return model
+    
+    model = vehicle.map(async item => {
+        const data = await Service.collection.find({number:item.number}).toArray()    
+          
+            if(Object.keys(data).length==0)
+            {                
+                if(catagory == item.catagory)
+                {
+                    return item.model
+                }
             }
-        }
     })
 
-    const result = await Promise.all(arr)
+    const result = await Promise.all(model)
     const resp = result.filter((item)=>{return item})
-    res.json({list:resp})
+    res.send(resp)
 })
 
 router.post('/add',async(req,res)=>{
