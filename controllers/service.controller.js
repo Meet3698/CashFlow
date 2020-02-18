@@ -10,7 +10,7 @@ router.get('/',async(req,res)=>{
 })
 
 router.post('/find',async(req,res)=>{
-
+    console.log(req.body);
     const email = req.body.email
     const catagory = req.body.vehicleCatagory
     let model = []
