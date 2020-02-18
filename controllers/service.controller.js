@@ -17,10 +17,11 @@ router.post('/find',async(req,res)=>{
     
     const vehicle = await UserVehicle.collection.find({email:email}).toArray()
     const arr = vehicle.map(async item => {
-        const data = await Service.collection.find({number:item.number}).toArray()
-        
+    const data = await Service.collection.find({number:item.number}).toArray()    
         if(Object.keys(data).length!=0)
         {
+            console.log(item.model,item.catagory);
+            
             if(catagory == item.catagory)
             {
                 model.push(item.model)
@@ -30,8 +31,7 @@ router.post('/find',async(req,res)=>{
     })
 
     const result = await Promise.all(arr)
-    const resp = result.filter((item)=>{return item})  
-    console.log(resp);
+    const resp = result.filter((item)=>{return item})
     res.json({list:resp})
 })
 
