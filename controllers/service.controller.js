@@ -21,7 +21,7 @@ router.post('/find',async(req,res)=>{
         
         if(Object.keys(data).length!=0)
         {
-            if(catagory == item.vehicleCatagory)
+            if(catagory == item.catagory)
             {
                 model.push(item.model)
                 return model
