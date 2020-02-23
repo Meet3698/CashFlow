@@ -4,16 +4,16 @@ const UserVehicleSchema = new mongoose.Schema({
     email : {
        type : String,
     },
-    type : {
+    vehicleType : {
         type : String,
     },
-    brand : {
+    brandName : {
         type : String
     },
-    model : {
+    vehicleModel : {
         type : String
     },
-    catagory : {
+    vehicleCatagory : {
         type : String
     },
     number : {
@@ -29,7 +29,7 @@ const UserVehicleSchema = new mongoose.Schema({
     parkingarea : {
         type : String
     },
-    preferredTime : {
+    prefferedTime : {
         type : String
     }
 })

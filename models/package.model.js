@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const PackageSchema = new mongoose.Schema({
-    id : {
+    oackageId : {
         type : Number
     },
     name : {
