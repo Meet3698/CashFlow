@@ -15,7 +15,6 @@ router.get('/',async(req,res)=>{
             cust.push(arr)
         }
     })
-
 })
 
 router.get('/add',(req,res)=>{

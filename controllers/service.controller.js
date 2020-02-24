@@ -23,7 +23,7 @@ router.post('/find',async(req,res)=>{
             {                
                 if(catagory == item.vehicleCatagory)
                 {
-                    return item.vehicleModel
+                    return {vehicleModel:item.vehicleModel,number:item.number}
                 }
             }
     })
