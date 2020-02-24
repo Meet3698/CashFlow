@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserVehicleSchema = new mongoose.Schema({
+const tempSchema = new mongoose.Schema({
     email : {
        type : String,
     },
@@ -31,10 +31,7 @@ const UserVehicleSchema = new mongoose.Schema({
     },
     prefferedTime : {
         type : String
-    },
-    flag : {
-        type : Number
     }
 })
 
-mongoose.model('UserVehicle',UserVehicleSchema)
+mongoose.model('Temp',tempSchema)
