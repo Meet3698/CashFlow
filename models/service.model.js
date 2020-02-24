@@ -7,9 +7,6 @@ const ServiceSchema = new mongoose.Schema({
     },
     id : {
         type : Number
-    },
-    vehicleCatagory : {
-        type : String
     }
 })
 
