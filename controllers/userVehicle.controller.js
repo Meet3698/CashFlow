@@ -5,9 +5,9 @@ const mongoose = require('mongoose')
 const UserVehicle = mongoose.model('UserVehicle')
 const Brand = mongoose.model('Brand')
 
-router.get('/',(req,res)=>{
-    res.sendfile('./view/index.html')
-})
+// router.get('/',(req,res)=>{
+//     res.sendfile('./view/index.html')
+// })
 
 router.post('/addvehicle',async (req,res)=>{
     console.log(req.body);
@@ -26,9 +26,9 @@ router.post('/addvehicle',async (req,res)=>{
     })
 })
 
-router.get('/find',(req,res)=>{
-    res.sendfile('./view/index.html')
-})
+// router.get('/find',(req,res)=>{
+//     res.sendfile('./view/index.html')
+// })
 
 router.post('/findModel',(req,res)=> {
     const brand = req.body.brand

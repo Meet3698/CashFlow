@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
 
 const ServiceSchema = new mongoose.Schema({
+    email : {
+        type : String,
+    },
+    orderId : {
+        type : String
+    },
     number : {
         type : Number,
         unique : true

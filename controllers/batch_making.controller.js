@@ -8,7 +8,6 @@ router.get('/',async(req,res)=>{
     let cust = []
 
     const arr = await UserVehicle.collection.find({flag:0}).toArray()
-    
     const arr1 = await Cleaner.collection.find({}).toArray()
 
     const flag = arr1.map((item)=>{   
@@ -37,6 +36,7 @@ router.get('/',async(req,res)=>{
     res.send(resp)
 })
 
+//---------------------------------------------------------------------
 router.get('/flag',async(req,res)=>{
     await Cleaner.updateMany(
         {$set : { flag : 0}}
@@ -59,5 +59,6 @@ router.get('/add',(req,res)=>{
     cleaner.save()
 
 })
+//--------------------------------------------------------------------
 
 module.exports = router
