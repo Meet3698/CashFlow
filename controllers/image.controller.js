@@ -60,5 +60,9 @@ router.post('/upload',(req, res)=>{
     })
 })
 
-
+router.post('/get',(req,res)=>{
+  fs.readdir('./public',(err,item)=>{
+    res.send(item)
+  })
+})
 module.exports = router
