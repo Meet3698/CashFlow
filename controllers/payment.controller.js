@@ -3,7 +3,7 @@ const router = express.Router()
 require("dotenv").config();
 const {initPayment, responsePayment} = require("../paytm/services/index")
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
     initPayment(req.query.amount).then(
         
         success => {
