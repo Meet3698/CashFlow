@@ -55,7 +55,7 @@ router.post('/upload',(req, res)=>{
             if(error){ 
             throw error;
             }
-            res.redirect('/')
+            res.redirect('/image')
         })
     })
 })
