@@ -1,9 +1,9 @@
 module.exports = {
-  MID: 'DCjKyN62993935423467',
-  PAYTM_MERCHANT_KEY: '1KA%5NB@aAAXJG5l',
+  MID: 'vcauMr24482835714726',
+  PAYTM_MERCHANT_KEY: 'NUv2T%zfPzhukKaY',
   PAYTM_FINAL_URL: 'https://securegw-stage.paytm.in/order/process',
   WEBSITE: 'WEBSTAGING',
   CHANNEL_ID: 'WEB',
   INDUSTRY_TYPE_ID: 'Retail',
-  CALLBACK_URL: 'http://localhost:3000/response'
+  CALLBACK_URL: 'http://localhost:3000/payment/response'
 };
