@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const User = mongoose.model('User')
 
-router.post('/userdetails',async(res,req)=>{
-    console.log(req.body);
+router.post('/userdetails',async(req,res)=>{
+    console.log(req.body.email);
     
     User.find({email:req.body.email}).then((data)=>{
         res.json({email : data.email,phone : data.phone})
