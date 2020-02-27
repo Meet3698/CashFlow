@@ -8,7 +8,7 @@ const Package = mongoose.model('Package')
 
 router.post('/userdetails',(req,res)=>{
     User.find({email:req.body.email}).then((data)=>{
-        res.json({phone : data[0].phone})
+        res.json({name:data[0].name,phone : data[0].phone})
     })
 })
 
