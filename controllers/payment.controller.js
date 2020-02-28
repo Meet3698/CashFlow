@@ -4,13 +4,14 @@ require("dotenv").config();
 const {initPayment, responsePayment} = require("../paytm/services/index")
 
 router.post("/", (req, res) => {
-    console.log(req.body.amount);
     
-    initPayment(req.body.amount).then(
+    initPayment(req.query.amount).then(
         
         success => {
-            console.log(success);
-            res.json({resultData: success});
+            res.render("../view/paytmRedirect.html", {
+                resultData: success,
+                paytmFinalUrl: 'https://securegw-stage.paytm.in/order/process'
+            });
         },
         error => {
             res.send(error);
