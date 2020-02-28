@@ -4,9 +4,12 @@ require("dotenv").config();
 const {initPayment, responsePayment} = require("../paytm/services/index")
 
 router.post("/", (req, res) => {
-    initPayment(req.query.amount).then(
+    console.log(req.body.amount);
+    
+    initPayment(req.body.amount).then(
         
         success => {
+            console.log(success);
             res.json({resultData: success});
         },
         error => {
