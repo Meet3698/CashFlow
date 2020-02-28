@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
     initPayment(req.query.amount).then(
         
         success => {
-            res.json({resultData: success);
+            res.json({resultData: success});
         },
         error => {
             res.send(error);
