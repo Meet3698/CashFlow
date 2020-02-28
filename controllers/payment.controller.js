@@ -7,10 +7,7 @@ router.post("/", (req, res) => {
     initPayment(req.query.amount).then(
         
         success => {
-            res.render("../view/paytmRedirect.html", {
-                resultData: success,
-                paytmFinalUrl: 'https://securegw-stage.paytm.in/order/process'
-            });
+            res.json({resultData: success);
         },
         error => {
             res.send(error);
