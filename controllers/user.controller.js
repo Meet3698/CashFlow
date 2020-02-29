@@ -5,6 +5,7 @@ const sgKey="SG.xB8kJxgrSq-CbPBq1CrQhg.ULX-eMavMP6lvJsrOe1U2jQ0bCWnP-hOHmoTFuIYv
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(sgKey);
 
+var nodemailer = require('nodemailer')
 const mongoose = require('mongoose')
 const User = mongoose.model('User') 
 const OTP = mongoose.model('OTP')
@@ -37,12 +38,28 @@ router.post('/registerotp',async(req,res)=>{
                 
                     await otp.save()
 
-            sgMail.send({
-                to: req.body.email,  
-                from: 'm3et6041@gmail.com',
-                subject: 'OTP',
-                text: rand.toString()
-                })   
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                          user: 'dutchman5972@gmail.com',
+                          pass: 'Flying3698M'
+                        }
+                      });
+                      
+                      var mailOptions = {
+                        from: 'dutchman5972@gmail.com',
+                        to: req.body.email,
+                        subject: 'Your OTP',
+                        text: rand.toString()
+                      }
+                      
+                      transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                        }
+                      })
             
                 console.log(rand)
                 
@@ -88,12 +105,29 @@ router.post('/loginotp',async (req,res) =>{
             {$set : { otp : rand}}
         )
 
-    sgMail.send({
-    to: req.body.email,  
-    from: 'm3et6041@gmail.com',
-    subject: 'OTP',
-    text: rand.toString()
-    })
+    
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'dutchman5972@gmail.com',
+              pass: 'Flying3698M'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'dutchman5972@gmail.com',
+            to: req.body.email,
+            subject: 'Your OTP',
+            text: rand.toString()
+          }
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          })
     
         res.json({message : true})
     }
