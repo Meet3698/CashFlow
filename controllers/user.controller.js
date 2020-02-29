@@ -41,8 +41,8 @@ router.post('/registerotp',async(req,res)=>{
                     var transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                          user: 'dutchman5972@gmail.com',
-                          pass: 'Flying3698M'
+                            user: 'shakalaka112358@gmail.com',
+                            pass: 'Boomboom@123'
                         }
                       });
                       
@@ -109,8 +109,8 @@ router.post('/loginotp',async (req,res) =>{
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'dutchman5972@gmail.com',
-              pass: 'Flying3698M'
+              user: 'shakalaka112358@gmail.com',
+              pass: 'Boomboom@123'
             }
           });
           
