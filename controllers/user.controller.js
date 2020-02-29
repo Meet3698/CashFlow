@@ -11,8 +11,6 @@ const User = mongoose.model('User')
 const OTP = mongoose.model('OTP')
 
 router.post('/registerotp',async(req,res)=>{
-    sess.email = req.body.email
-
     const user = new User(req.body)
 
     await user.save(async(err)=>{
@@ -42,7 +40,7 @@ router.post('/registerotp',async(req,res)=>{
                         service: 'gmail',
                         auth: {
                             user: 'shakalaka112358@gmail.com',
-                            pass: 'kcxbgwaxjwirwdde'
+                            pass: 'Boomboom@123'
                         }
                       });
                       
