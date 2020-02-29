@@ -42,7 +42,7 @@ router.post('/registerotp',async(req,res)=>{
                         service: 'gmail',
                         auth: {
                             user: 'shakalaka112358@gmail.com',
-                            pass: 'Boomboom@123'
+                            pass: 'kcxbgwaxjwirwdde'
                         }
                       });
                       
