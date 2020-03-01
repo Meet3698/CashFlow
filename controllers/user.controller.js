@@ -140,8 +140,6 @@ router.post('/loginotp',async (req,res) =>{
         res.json({message : false})
     }
 })
-    
-//---------------------------------------------------------------------------------------------
 
 router.get('/name', callName); 
   

@@ -22,17 +22,19 @@ router.post('/addvehicle',async (req,res)=>{
     })
 })
 
-router.post('/findModel',(req,res)=> {
+router.post('/findModel',async(req,res)=> {
     const brand = req.body.brand
-    const category = req.body.catagory
-    
-    Brand.collection.find({brandName:brand,vehicleCatagory:category}).toArray().then((result)=>{
-        const list = result.map((item)=>{
-            let model = [item.vehicleModel].join(",")
-            return model;
-        })
-        res.json({list:list})
-    })
+    const catagory = req.body.catagory
+    console.log(brand,catagory);
+    let list = []
+    const result = await Brand.collection.find({brandName:brand,vehicleCatagory:catagory}).toArray()
+    const len = result.length
+
+    for(i=0;i<len;i++)
+    {
+        list.push(result[i].vehicleModel)
+    }
+    res.json({list:list})
 })
 
 module.exports = router

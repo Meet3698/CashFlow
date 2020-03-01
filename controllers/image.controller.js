@@ -51,7 +51,7 @@ router.post('/upload',(req, res)=>{
         };
 
         const image = new Image(document)
-        image.save(function(error){
+        image.save((error)=>{
             if(error){ 
             throw error;
             }

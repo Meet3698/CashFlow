@@ -21,4 +21,4 @@ UserSchema.statics.findUserById = async (email) => {
     const del = await User.deleteOne({email:email})
     return del
 }
-const User = mongoose.model('User',UserSchema)
+mongoose.model('User',UserSchema)
