@@ -17,8 +17,4 @@ const UserTempSchema = new mongoose.Schema({
    }
 })
 
-UserSchema.statics.findUserById = async (email) => {
-    const del = await User.deleteOne({email:email})
-    return del
-}
 mongoose.model('UserTemp',UserTempSchema)
