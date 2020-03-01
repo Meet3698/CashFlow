@@ -82,6 +82,7 @@ router.post('/verify',async(req,res)=>{
       await user.save((err)=>{
         if(!err)
         {
+          console.log(user);
           res.json({message : true})
         }
       })
@@ -108,7 +109,7 @@ router.post('/loginotp',async (req,res) =>{
             {email:email},
             {$set : { otp : rand}}
         )
-        
+
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
