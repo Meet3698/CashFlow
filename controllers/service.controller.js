@@ -29,7 +29,6 @@ router.post('/find',async(req,res)=>{
     })
 
     const result = await Promise.all(model)
-    console.log(result);
     const resp = result.filter((item)=>{return item})
     res.send(resp)
 })

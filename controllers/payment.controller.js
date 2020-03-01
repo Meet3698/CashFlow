@@ -5,7 +5,7 @@ const {initPayment, responsePayment} = require("../paytm/services/index")
 
 router.post("/", (req, res) => {
     
-    initPayment(req.query.amount).then(
+    initPayment(req.post.amount).then(
         
         success => {
             res.render("../view/paytmRedirect.html", {

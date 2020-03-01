@@ -39,7 +39,7 @@ router.post('/registerotp',async(req,res)=>{
                     var transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                            user: 'shakalaka112358@gmail.com',
+                            user: 'shakalaka112358',
                             pass: 'Boomboom@123'
                         }
                       });

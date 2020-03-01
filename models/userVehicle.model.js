@@ -31,9 +31,6 @@ const UserVehicleSchema = new mongoose.Schema({
     },
     prefferedTime : {
         type : String
-    },
-    flag : {
-        type : Number
     }
 })
 

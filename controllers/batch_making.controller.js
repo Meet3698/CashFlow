@@ -6,64 +6,42 @@ const Service = mongoose.model('Service')
 const Cleaner = mongoose.model('Cleaner')
 
 router.get('/',async(req,res)=>{
-    let cust = []
-
-    const arr = await UserVehicle.collection.find({flag:0}).toArray()
-    const arr1 = await Cleaner.collection.find({}).toArray()
-
-    const flag = arr1.map((item)=>{   
-            let len = arr.length-1 
-            // let customer = arr[len]
-            if (item.flag==0 && len>=0)
-            {       
-                cust.push({cleaner : item.name, customer : arr[len]})
-                
-                UserVehicle.updateOne(
-                    {number : arr[len].number},
-                    {$set : { flag : 1}}
-                ).then(()=>{})
-        
-                Cleaner.updateOne(
-                    {email:item.email},
-                    {$set : { flag : 1}}
-                ).then(()=>{})
-        
-                arr.pop()
-            }
-        })
-
-    const result = await Promise.all(cust)
-    console.log("result ",result);
-    const resp = result.filter((item)=>{return item})
-    res.send(resp)
-})
-
-// const flag = arr1.map((item)=>{   
-//     let len = arr.length-1 
     
-//     if (item.flag==0 && len>=0)
-//     {            
-//         cust.push({cleaner : item.name, customer : arr[len]})
-        
-//         UserVehicle.updateOne(
-//             {number : customer.number},
-//             {$set : { flag : 1}}
-//         ).then(()=>{})
+    const arr = await Cleaner.collection.find({flag:0}).toArray()
+    const service = await Service.collection.find({flag : 0}).toArray()
+    
+    let len = arr.length-1
+    let len1 = service.length 
+    let cust = []
+   
+    for (i=0;i<len1;i++)
+    {
+        if(len >= 0)
+        {   
+            const arr1 = await UserVehicle.collection.find({number : service[i].number}).toArray()
+            
+            await Service.collection.updateOne(
+                {number :  service[i].number},
+                {$set : { flag : 1}}
+            )
+            
+            await Cleaner.collection.updateOne(
+                {email:arr[len].email},
+                {$set : { flag : 1}}
+            )
+            cust.push({cleaner : arr[len].name, service : service[i], customer : arr1[0]})
+            len = len - 1
+        }
+    }
 
-//         Cleaner.updateOne(
-//             {email:item.email},
-//             {$set : { flag : 1}}
-//         ).then(()=>{})
-
-//         arr.pop()
-//     }
-// })
+    res.send(cust)
+})
 //---------------------------------------------------------------------
 router.get('/flag',async(req,res)=>{
     await Cleaner.updateMany(
         {$set : { flag : 0}}
     )
-    await UserVehicle.updateMany(
+    await Service.updateMany(
         {$set : { flag : 0}}
     )
     res.send("Done")

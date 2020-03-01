@@ -8,10 +8,13 @@ const ServiceSchema = new mongoose.Schema({
         type : String
     },
     number : {
-        type : Number,
+        type : String,
         unique : true
     },
     id : {
+        type : Number
+    },
+    flag : {
         type : Number
     }
 })
