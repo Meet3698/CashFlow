@@ -15,26 +15,24 @@ router.post('/find',async(req,res)=>{
     let model = []
     
     const vehicle = await UserVehicle.collection.find({email:email}).toArray()
-    
-    model = vehicle.map(async item => {
-        const data = await Service.collection.find({number:item.number}).toArray()    
-          
-            if(Object.keys(data).length==0)
-            {                
-                if(catagory == item.vehicleCatagory)
-                {
-                    return {vehicleModel:item.vehicleModel,number:item.number}
-                }
-            }
-    })
+    const len = vehicle.length
 
-    const result = await Promise.all(model)
-    const resp = result.filter((item)=>{return item})
-    res.send(resp)
+    for(i=0;i<len;i++)
+    {
+        const data = await Service.collection.find({number:vehicle[i].number}).toArray()
+        if(data != [])
+        {                
+            if(catagory == vehicle[i].vehicleCatagory)
+            {
+                model.push({vehicleModel:vehicle[i].vehicleModel,number:vehicle[i].number})
+            }
+        }
+    }
+   
+    res.send(model)
 })
 
 router.post('/add',async(req,res)=>{
- 
     const service = req.body
     Service.collection.insertMany(service,(err,data)=>{
         if(err)
@@ -49,20 +47,15 @@ router.post('/add',async(req,res)=>{
 })
 
 router.get('/show',async(req,res)=>{
-    try {
-        Service.find({}).then((err,data)=>{
-            if(err){
-                res.json(err)
-           }
-            else{
-               res.json(data)
-                await  
-            }
-       })
-        } catch (e) {
-            const err = new Error(e)
-            log(err.message)
-    }
+    Service.find({}).then((err,data)=>{
+        if(err){
+            res.json(err)
+        }
+        else{
+            res.json(data)
+            await  
+        }
+    })
 })
 
 module.exports = router

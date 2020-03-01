@@ -39,13 +39,13 @@ router.post('/registerotp',async(req,res)=>{
                     var transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                            user: 'shakalaka112358',
-                            pass: 'Boomboom@123'
+                            user: 'mycarwash911',
+                            pass: 'fepkxlltzzdqbxbm'
                         }
                       });
                       
                       var mailOptions = {
-                        from: 'dutchman5972@gmail.com',
+                        from: 'mycarwash911@gmail.com',
                         to: req.body.email,
                         subject: 'Your OTP',
                         text: rand.toString()
@@ -107,13 +107,13 @@ router.post('/loginotp',async (req,res) =>{
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'shakalaka112358@gmail.com',
-              pass: 'Boomboom@123'
+              user: 'mycarwash911',
+              pass: 'fepkxlltzzdqbxbm'
             }
           });
           
           var mailOptions = {
-            from: 'dutchman5972@gmail.com',
+            from: 'mycarwash911@gmail.com',
             to: req.body.email,
             subject: 'Your OTP',
             text: rand.toString()

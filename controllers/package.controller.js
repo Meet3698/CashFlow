@@ -10,26 +10,20 @@ router.get('/',(req,res)=>{
 
 
 router.get('/show',async(req,res)=>{
-    try {
-        Package.find({}).then((err,data)=>{
-            if(err){
-                res.json(err)
-           }
-            else{
-               res.json(data)
-                await  
-            }
-       })
-        } catch (e) {
-            const err = new Error(e)
-            log(err.message)
-    }
+    Package.find({}).then((err,data)=>{
+        if(err){
+            res.json(err)
+        }
+        else{
+            res.json(data)
+            await  
+        }
+    })
 })
 
 router.post('/addpack',async (req,res)=>{
     const package = new Package(req.body)
     await package.save()
-
     res.send("ok")
 })
 
