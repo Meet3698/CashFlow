@@ -8,10 +8,11 @@ sgMail.setApiKey(sgKey);
 var nodemailer = require('nodemailer')
 const mongoose = require('mongoose')
 const User = mongoose.model('User') 
+const UserTemp = mongoose.model('UserTemp') 
 const OTP = mongoose.model('OTP')
 
 router.post('/registerotp',async(req,res)=>{
-    const user = new User(req.body)
+    const user = new UserTemp(req.body)
 
     await user.save(async(err)=>{
         if(err)
@@ -77,13 +78,18 @@ router.post('/verify',async(req,res)=>{
     
     if(otp.otp == req.body.otp)
     {
-        res.json({message : true})
+      const user = new User(await UserTemp.findOne({email:email}))
+      await user.save((err)=>{
+        if(!err)
+        {
+          res.json({message : true})
+        }
+      })
     }
     else
     {
         res.json({message : false})
     }
-
 })
 
 router.post('/loginotp',async (req,res) =>{
@@ -102,8 +108,7 @@ router.post('/loginotp',async (req,res) =>{
             {email:email},
             {$set : { otp : rand}}
         )
-
-    
+        
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
