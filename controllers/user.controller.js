@@ -63,7 +63,7 @@ router.post('/verify',async(req,res)=>{
   const email = req.body.email
   console.log(email)
   
-  const otp = await OTP.findOne({email})
+  const otp = await OTP.findOne({email:email})
 
   console.log(otp.otp)
   console.log(otp)
