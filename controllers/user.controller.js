@@ -64,26 +64,24 @@ router.post('/verify',async(req,res)=>{
   console.log(email)
   
   const otp = await OTP.findOne({email:email})
+  const user = await UserTemp.findOne({email:email})
 
-  console.log(otp.otp,"\n")
-  console.log(otp)
+  console.log(otp.otp)
   
   if(otp.otp == req.body.otp)
   {
-    const user = new User(await UserTemp.findOne({email:email}))
-    console.log("user",user);
-    
-    await user.save((err)=>{
+    const user1 = new User(user)
+    await user.save(async(err)=>{
       if(err)
       {
-        console.log(err);
+        res.send(err)
       }
       else
       {
-        console.log(user);
-        OTP.update(
+        const rand = Math.trunc(Math.random() * 1000000)
+        await OTP.update(
           {email:email},
-          {$set : {otp : null}}
+          {$set : {otp : rand}}
         )
         res.json({message : true})
       }
