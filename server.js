@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cors())
 app.use(session({secret : 'Harry5972',saveUninitialized:true,resave:true}))
 
-app.use(function(req, res, next) {
+app.use((req, res, next)=> {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
     next();
