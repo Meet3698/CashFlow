@@ -65,12 +65,14 @@ router.post('/verify',async(req,res)=>{
   
   const otp = await OTP.findOne({email:email})
 
-  console.log(otp.otp)
+  console.log(otp.otp,"\n")
   console.log(otp)
   
   if(otp.otp == req.body.otp)
   {
     const user = new User(await UserTemp.findOne({email:email}))
+    console.log("user",user);
+    
     await user.save((err)=>{
       if(err)
       {
