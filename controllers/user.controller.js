@@ -59,13 +59,9 @@ router.post('/registerotp',async(req,res)=>{
   })
 })
 
-router.post('/verify',async(req,res)=>{ 
+router.post('/verifyregister',async(req,res)=>{ 
   const email = req.body.email
-  console.log(email)
-  
   const otp = await OTP.findOne({email:email})
-
-  console.log(otp.otp)
   
   if(otp.otp == req.body.otp)
   {
@@ -85,6 +81,25 @@ router.post('/verify',async(req,res)=>{
         res.json({message : true})
       }
     })
+  }
+  else
+  {
+    res.json({message : false})
+  }
+})
+
+router.post('/verifylogin',async(req,res)=>{ 
+  const email = req.body.email
+  const otp = await OTP.findOne({email:email})
+  
+  if(otp.otp == req.body.otp)
+  { 
+    const rand = Math.trunc(Math.random() * 1000000)
+    await OTP.update(
+      {email:email},
+      {$set : {otp : rand}}
+    )
+    res.json({message : true})
   }
   else
   {
