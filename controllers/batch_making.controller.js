@@ -18,7 +18,7 @@ router.get('/',async(req,res)=>{
     {
         if(len >= 0)
         {   
-            let offset =((new Date().getTimezoneOffset() / 60) * -1)
+            let offset =((new Date().getTimezoneOffset() / 60))
             let time = (new Date().getTime() + offset)
             console.log("Time : ",time);
             
