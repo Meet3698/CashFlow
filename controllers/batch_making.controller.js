@@ -18,9 +18,8 @@ router.get('/',async(req,res)=>{
     {
         if(len >= 0)
         {   
-            let offset =((new Date().getTimezoneOffset() / 60) * -1)
-            let time = new Date().getHours() + offset
-            
+            let time = (new Date().getHours() + 5.5)
+
             console.log("Time : ",time);
             
             const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:18}).toArray()
