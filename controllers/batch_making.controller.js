@@ -21,18 +21,22 @@ router.get('/',async(req,res)=>{
             let time = new Date().getHours()
             console.log("Time : ",time);
             
-            const arr1 = await UserVehicle.collection.find({number : service[i].number},{prefferedTime:time}).toArray()
+            const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:18}).toArray()
+            console.log(arr1);
             
-            await Service.collection.updateOne(
-                {number :  service[i].number},
-                {$set : { flag : 1}}
-            )
-            
-            await Cleaner.collection.updateOne(
-                {email:arr[len].email},
-                {$set : { flag : 1}}
-            )
-            cust.push({cleaner : arr[len].name, service : service[i], customer : arr1[0]})
+            if (arr1.length)
+            {
+                await Service.collection.updateOne(
+                    {number :  service[i].number},
+                    {$set : { flag : 1}}
+                )
+                
+                await Cleaner.collection.updateOne(
+                    {email:arr[len].email},
+                    {$set : { flag : 1}})
+
+                cust.push({cleaner : arr[len].name, service : service[i], customer : arr1[0]})
+            }
             len = len - 1
         }
     }
