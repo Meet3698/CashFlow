@@ -19,6 +19,8 @@ router.get('/',async(req,res)=>{
         if(len >= 0)
         {   
             let time = new Date().getHours()
+            console.log("Time : ",time);
+            
             const arr1 = await UserVehicle.collection.find({number : service[i].number},{prefferedTime:time}).toArray()
             
             await Service.collection.updateOne(
