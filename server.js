@@ -16,6 +16,8 @@ const session = require('express-session')
 const cors = require('cors')
 const app = express()
 
+let date_obj = new Date()
+console.log(typeof(date_obj.getHours()));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))

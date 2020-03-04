@@ -30,7 +30,7 @@ const UserVehicleSchema = new mongoose.Schema({
         type : String
     },
     prefferedTime : {
-        type : String
+        type : Number
     }
 })
 
