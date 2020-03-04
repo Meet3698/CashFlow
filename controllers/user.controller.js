@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer')
 const User = mongoose.model('User') 
 const UserTemp = mongoose.model('UserTemp') 
 const OTP = mongoose.model('OTP')
+process.env.TZ = 'Asia'
 
 router.post('/registerotp',async(req,res)=>{
   const user = new UserTemp(req.body)
