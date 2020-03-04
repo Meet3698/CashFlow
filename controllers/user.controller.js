@@ -62,7 +62,7 @@ router.post('/registerotp',async(req,res)=>{
 router.post('/verifyregister',async(req,res)=>{ 
   const email = req.body.email
   const otp = await OTP.findOne({email:email})
-  log
+
   if(otp.otp == req.body.otp)
   {
     const user = new User(req.body)
