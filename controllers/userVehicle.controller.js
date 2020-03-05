@@ -4,6 +4,8 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const UserVehicle = mongoose.model('UserVehicle')
 const Brand = mongoose.model('Brand')
+const Service = mongoose.model('Service')
+const Package = mongoose.model('Package')
 
 router.post('/addvehicle',async (req,res)=>{
     console.log(req.body)
@@ -38,18 +40,16 @@ router.post('/findmodel',async(req,res)=> {
 })
 
 router.post('/getvehicle',async(req,res)=>{
-    const email = req.body.email
-    const vehicle = await UserVehicle.collection.find({email:email}).toArray()
-    const id = await Service.collection.find({email:req.body.email}).toArray()
-    const len = id.length
+    const vehicle = await UserVehicle.collection.find({email:req.body.email}).toArray()
+    const len = vehicle.length
     let pack = []
 
     for (i = 0; i < len; i++) {
-        const res = await Package.collection.find({packageId:id[i].id}).toArray()
-        const cust = await UserVehicle.collection.find({number : id[i].number}).toArray()
-        pack.push({package : res, customer : cust})
+        const service = await Service.collection.findOne({number : vehicle[i].number})
+        const package = await Package.collection.findOne({packageId:service.id})
+        pack.push({customer : vehicle[i],package : package})
     }
     
-    res.send({vehicle:vehicle,package:pack})
+    res.send(pack)
 })
 module.exports = router
