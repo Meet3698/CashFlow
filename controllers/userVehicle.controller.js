@@ -39,7 +39,7 @@ router.post('/findmodel',async(req,res)=> {
 
 router.post('/getvehicle',async(req,res)=>{
     const email = req.body.email
-    const vehicle = await UserVehicle.collection.find({email:emai}).toArray()
+    const vehicle = await UserVehicle.collection.find({email:email}).toArray()
     const id = await Service.collection.find({email:req.body.email}).toArray()
     const len = id.length
     let pack = []
