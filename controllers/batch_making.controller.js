@@ -23,7 +23,7 @@ router.get('/',async(req,res)=>{
 
             console.log("Time : ",time);
             
-            const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:18}).toArray()
+            const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:time}).toArray()
             console.log(arr1);
             
             if (arr1.length)
