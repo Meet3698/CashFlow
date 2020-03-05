@@ -21,10 +21,10 @@ router.get('/',async(req,res)=>{
             // let offset =((new Date().getTimezoneOffset() / 60) * -1)
             let time = new Date().getHours() + 6
 
-            console.log("Time : ",time);
+            console.log("Time : ",time)
             
             const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:time}).toArray()
-            console.log(arr1);
+            console.log(arr1)
             
             if (arr1.length)
             {

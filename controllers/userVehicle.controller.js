@@ -6,7 +6,7 @@ const UserVehicle = mongoose.model('UserVehicle')
 const Brand = mongoose.model('Brand')
 
 router.post('/addvehicle',async (req,res)=>{
-    console.log(req.body);
+    console.log(req.body)
 
     const userVehicle = new UserVehicle(req.body)
     await userVehicle.save((err)=>{
@@ -22,10 +22,10 @@ router.post('/addvehicle',async (req,res)=>{
     })
 })
 
-router.post('/findModel',async(req,res)=> {
+router.post('/findmodel',async(req,res)=> {
     const brand = req.body.brand
     const catagory = req.body.catagory
-    console.log(brand,catagory);
+    console.log(brand,catagory)
     let list = []
     const result = await Brand.collection.find({brandName:brand,vehicleCatagory:catagory}).toArray()
     const len = result.length
@@ -37,4 +37,9 @@ router.post('/findModel',async(req,res)=> {
     res.json({list:list})
 })
 
+router.post('/getvehicle',async(req,res)=>{
+    const email = req.body.email
+    const vehicle = await UserVehicle.collection.find({email:emai}).toArray()
+    res.send(vehicle)
+})
 module.exports = router

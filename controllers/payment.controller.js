@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-require("dotenv").config();
+require("dotenv").config()
 const {initPayment, responsePayment} = require("../paytm/services/index")
 
 router.post("/", (req, res) => {
@@ -11,23 +11,23 @@ router.post("/", (req, res) => {
             res.render("../view/paytmRedirect.html", {
                 resultData: success,
                 paytmFinalUrl: 'https://securegw-stage.paytm.in/order/process'
-            });
+            })
         },
         error => {
-            res.send(error);
+            res.send(error)
         }
-    );
-});
+    )
+})
 
 router.post("/response", (req, res) => {
     responsePayment(req.body).then(
         success => {
-            res.render("../view/response.html", {resultData: "true", responseData: success});
+            res.render("../view/response.html", {resultData: "true", responseData: success})
         },
         error => {
-            res.send(error);
+            res.send(error)
         }
-    );
-});
+    )
+})
 
 module.exports = router
