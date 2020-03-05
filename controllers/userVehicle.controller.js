@@ -40,6 +40,16 @@ router.post('/findmodel',async(req,res)=> {
 router.post('/getvehicle',async(req,res)=>{
     const email = req.body.email
     const vehicle = await UserVehicle.collection.find({email:emai}).toArray()
-    res.send(vehicle)
+    const id = await Service.collection.find({email:req.body.email}).toArray()
+    const len = id.length
+    let pack = []
+
+    for (i = 0; i < len; i++) {
+        const res = await Package.collection.find({packageId:id[i].id}).toArray()
+        const cust = await UserVehicle.collection.find({number : id[i].number}).toArray()
+        pack.push({package : res, customer : cust})
+    }
+    
+    res.send({vehicle:vehicle,package:pack})
 })
 module.exports = router
