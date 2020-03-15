@@ -112,8 +112,7 @@ router.post('/loginotp',async (req,res) =>{
   
   const email = req.body.email
   console.log(email)
-  const user = await User.find({email:email})
-  console.log(typeof(user))
+  const user = await User.collection.find({email:email}).toArray()
 
   if(user!= [])
   {
