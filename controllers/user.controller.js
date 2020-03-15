@@ -113,7 +113,7 @@ router.post('/loginotp',async (req,res) =>{
   const email = req.body.email
   console.log(email)
   const user = await User.find({email:email})
-  console.log(user)
+  console.log(typeof(user))
 
   if(user!= [])
   {
