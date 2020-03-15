@@ -40,16 +40,21 @@ router.post('/findmodel',async(req,res)=> {
 })
 
 router.post('/getvehicle',async(req,res)=>{
-    const vehicle = await UserVehicle.collection.find({email:req.body.email}).toArray()
-    const len = vehicle.length
-    let pack = []
+    const vehicle = await UserVehicle.find({email:req.body.email})
+    const service = await Service.find({email:req.body.email})
+    const package = await Package.find({})
 
-    for (i = 0; i < len; i++) {
-        const service = await Service.collection.findOne({number : vehicle[i].number})
-        const package = await Package.collection.findOne({packageId:service.id})
-        pack.push({customer : vehicle[i],package : package})
-    }
+    res.send({vehicle : vehicle, service : service, package : package})
+    // const vehicle = await UserVehicle.collection.find({email:req.body.email}).toArray()
+    // const len = vehicle.length
+    // let pack = []
+
+    // for (i = 0; i < len; i++) {
+    //     const service = await Service.collection.findOne({number : vehicle[i].number})
+    //     const package = await Package.collection.findOne({packageId:service.id})
+    //     pack.push({customer : vehicle[i],package : package})
+    // }
     
-    res.send(pack)
+    // res.send(pack)
 })
 module.exports = router
