@@ -112,9 +112,9 @@ router.post('/loginotp',async (req,res) =>{
   
   const email = req.body.email
   console.log(email)
-  const user = await User.collection.find({email:email}).toArray()
+  const user = await User.find({email:email})
 
-  if(user!= [])
+  if(Object.keys(user).length != 0 )
   {
   const rand = Math.trunc(Math.random() * 1000000)
   console.log(rand)
