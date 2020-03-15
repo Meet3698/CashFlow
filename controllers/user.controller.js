@@ -115,7 +115,7 @@ router.post('/loginotp',async (req,res) =>{
   const user = await User.find({email:email})
   console.log(user)
 
-  if(user!= null)
+  if(user!= [])
   {
   const rand = Math.trunc(Math.random() * 1000000)
   console.log(rand)
