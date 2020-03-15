@@ -3,6 +3,8 @@ const router = express.Router()
 
 const mongoose = require('mongoose')
 const Cleaner = mongoose.model('Cleaner')
+const OTP = mongoose.model('OTP')
+const nodemailer = require('nodemailer')
 
 router.post('/verifylogin',async(req,res)=>{ 
     const email = req.body.email
@@ -27,22 +29,24 @@ router.post('/loginotp',async (req,res) =>{
 
     const email = req.body.email
     console.log(email)
-    const Cleaner = await Cleaner.find({email:email})
+    const cleaner = await Cleaner.find({email:email})
 
-    if(Object.keys(Cleaner).length != 0 )
+    if(Object.keys(cleaner).length != 0 )
     {
         const rand = Math.trunc(Math.random() * 1000000)
         console.log(rand)
 
-        await OTP.update(
-            {email:email},
-            {$set : { otp : rand}}
-        )
+        const otp = new OTP({
+            email : req.body.email,
+            otp : rand
+          })
+              
+        await otp.save()
 
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-            Cleaner: 'mycarwash911',
+            user: 'mycarwash911',
             pass: 'fepkxlltzzdqbxbm'
             }
         });
@@ -69,3 +73,5 @@ router.post('/loginotp',async (req,res) =>{
         res.json({message : false})
     }
 })
+
+module.exports = router
