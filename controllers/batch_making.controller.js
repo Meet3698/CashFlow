@@ -20,7 +20,7 @@ router.post('/',async(req,res)=>{
         if(len >= 0)
         {   
             // let offset =((new Date().getTimezoneOffset() / 60) * -1)
-            let time = new Date().getHours()    
+            let time = new Date().getHours() + 6
 
             console.log("Time : ",time)
             
