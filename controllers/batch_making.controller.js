@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const UserVehicle = mongoose.model('UserVehicle')
 const Service = mongoose.model('Service')
 const Cleaner = mongoose.model('Cleaner')
+const Package = mongoose.model('Package')
 
 router.post('/',async(req,res)=>{
     
@@ -19,11 +20,12 @@ router.post('/',async(req,res)=>{
         if(len >= 0)
         {   
             // let offset =((new Date().getTimezoneOffset() / 60) * -1)
-            let time = new Date().getHours() + 6
+            let time = new Date().getHours()    
 
             console.log("Time : ",time)
             
             const arr1 = await UserVehicle.collection.find({number : service[i].number,prefferedTime:time}).toArray()
+            const pack = await Package.collection.find({packageId : service[i].id}).toArray()
             console.log(arr1)
             
             if (arr1.length)
@@ -37,12 +39,13 @@ router.post('/',async(req,res)=>{
                     {email:arr[len].email},
                     {$set : { flag : 1}})
 
-                cust.push({cleaner : arr[len].name, service : service[i], customer : arr1[0]})
+                cust.push({cleaner : arr[len].name, package : pack, customer : arr1[0]})
             }
             len = len - 1
         }
     }
-
+    console.log(cust);
+    
     res.send(cust)
 })
 //---------------------------------------------------------------------
