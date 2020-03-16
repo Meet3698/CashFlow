@@ -57,7 +57,7 @@ router.post('/flag',async(req,res)=>{
         {$set : { flag : 0}
     })
 
-    res.send("done")
+    res.send({message : true})
 })
 
 router.get('/add',(req,res)=>{
