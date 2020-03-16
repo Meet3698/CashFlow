@@ -75,7 +75,7 @@ router.post('/verifyregister',async(req,res)=>{
       else
       {
         const rand = Math.trunc(Math.random() * 1000000)
-        await OTP.update(
+        await OTP.updateOne(
           {email:email},
           {$set : {otp : rand}}
         )
@@ -96,7 +96,7 @@ router.post('/verifylogin',async(req,res)=>{
   if(otp.otp == req.body.otp)
   { 
     const rand = Math.trunc(Math.random() * 1000000)
-    await OTP.update(
+    await OTP.updateOne(
       {email:email},
       {$set : {otp : rand}}
     )
@@ -119,7 +119,7 @@ router.post('/loginotp',async (req,res) =>{
   const rand = Math.trunc(Math.random() * 1000000)
   console.log(rand)
   
-  await OTP.update(
+  await OTP.updateOne(
       {email:email},
       {$set : { otp : rand}}
   )

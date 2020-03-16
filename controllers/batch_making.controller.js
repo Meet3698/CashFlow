@@ -83,7 +83,7 @@ router.post('/',async(req,res)=>{
 router.post('/flag',async(req,res)=>{
     const email = req.body.email
 
-    await Cleaner.update(
+    await Cleaner.updateOne(
         { email : email },
         {$set : { flag : 0}
     })

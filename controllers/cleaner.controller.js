@@ -13,7 +13,7 @@ router.post('/verifylogin',async(req,res)=>{
     if(otp.otp == req.body.otp)
     { 
         const rand = Math.trunc(Math.random() * 1000000)
-        await OTP.update(
+        await OTP.updateOne(
             {email:email},
             {$set : {otp : rand}}
         )
