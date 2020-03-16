@@ -61,7 +61,7 @@ router.post('/flag',async(req,res)=>{
     //     {email : email},
     //     {$set : { flag : 0}
     // })
-    // res.send("Done")
+    res.send("done")
 })
 
 router.get('/add',(req,res)=>{
