@@ -57,11 +57,11 @@ router.post('/flag',async(req,res)=>{
         {$set : { flag : 0}
     })
 
-    await Service.update(
-        {email : email},
-        {$set : { flag : 0}
-    })
-    res.send("Done")
+    // await Service.update(
+    //     {email : email},
+    //     {$set : { flag : 0}
+    // })
+    // res.send("Done")
 })
 
 router.get('/add',(req,res)=>{
