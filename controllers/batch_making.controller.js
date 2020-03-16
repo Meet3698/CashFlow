@@ -12,10 +12,11 @@ router.post('/',async(req,res)=>{
     const cleaner = await Cleaner.find({ $and : [{email : email},{flag : 0}]})
     const service = await Service.find({flag:0})
     const len = service.length -1
+    const len1 = cleaner.length
     
     const package = await Package.find({packageId:service[len].id})
     
-    if(len >0)
+    if(len >0 && len1>0)
     {
         let time = new Date().getHours() + 6
         console.log(time);
