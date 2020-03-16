@@ -33,8 +33,12 @@ router.post('/',async(req,res)=>{
             {$set : { flag : 1}})
         
         cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
+        res.send({list : cust})
     }
-    res.send({list : cust})
+    else
+    {
+        res.send({message:false})
+    }
     // const arr = await Cleaner.collection.find({flag:0}).toArray()
     // const service = await Service.collection.find({flag : 0}).toArray()
     
