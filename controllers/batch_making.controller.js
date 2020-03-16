@@ -5,7 +5,7 @@ const UserVehicle = mongoose.model('UserVehicle')
 const Service = mongoose.model('Service')
 const Cleaner = mongoose.model('Cleaner')
 
-router.get('/',async(req,res)=>{
+router.post('/',async(req,res)=>{
     
     const arr = await Cleaner.collection.find({flag:0}).toArray()
     const service = await Service.collection.find({flag : 0}).toArray()
@@ -46,13 +46,18 @@ router.get('/',async(req,res)=>{
     res.send(cust)
 })
 //---------------------------------------------------------------------
-router.get('/flag',async(req,res)=>{
-    await Cleaner.updateMany(
-        {$set : { flag : 0}}
-    )
-    await Service.updateMany(
-        {$set : { flag : 0}}
-    )
+router.post('/flag',async(req,res)=>{
+    const email = req.body.email
+
+    await Cleaner.update(
+        { email : email },
+        {$set : { flag : 0}
+    })
+
+    await Service.update(
+        {email : email},
+        {$set : { flag : 0}
+    })
     res.send("Done")
 })
 
