@@ -17,7 +17,7 @@ router.post('/',async(req,res)=>{
     
     if(len >0)
     {
-        let time = new Date().getHours() 
+        let time = new Date().getHours() + 6
         console.log(time);
         
         const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
