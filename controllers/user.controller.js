@@ -92,6 +92,7 @@ router.post('/verifyregister',async(req,res)=>{
 router.post('/verifylogin',async(req,res)=>{ 
   const email = req.body.email
   const otp = await OTP.findOne({email:email})
+  console.log(req.body);
   
   if(otp.otp == req.body.otp)
   { 
