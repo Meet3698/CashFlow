@@ -9,6 +9,8 @@ const nodemailer = require('nodemailer')
 router.post('/verifylogin',async(req,res)=>{ 
     const email = req.body.email
     const otp = await OTP.findOne({email:email})
+    console.log(otp);
+    console.log(req.body.otp);
     
     if(otp.otp == req.body.otp)
     { 
