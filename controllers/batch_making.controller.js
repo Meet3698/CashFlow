@@ -90,19 +90,6 @@ router.post('/flag',async(req,res)=>{
 
     res.send({message : true})
 })
-
-router.get('/add',(req,res)=>{
-
-    const cleaner = Cleaner({
-        email : 'cleaner1@carwash.com',
-        name : 'cleaner1',
-        phone : 9638409066,
-        address : 'abc',
-        flag : 0
-    })    
-    cleaner.save()
-
-})
 //--------------------------------------------------------------------
 
 module.exports = router

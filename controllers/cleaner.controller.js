@@ -18,7 +18,7 @@ router.post('/verifylogin',async(req,res)=>{
         await OTP.updateOne(
             {email:email},
             {$set : {otp : rand}}
-        )
+          )
         res.json({message : true})
     }
     else
@@ -38,12 +38,10 @@ router.post('/loginotp',async (req,res) =>{
         const rand = Math.trunc(Math.random() * 1000000)
         console.log(rand)
 
-        const otp = new OTP({
-            email : req.body.email,
-            otp : rand
-          })
-              
-        await otp.save()
+        await OTP.updateOne(
+            {email:email},
+            {$set : { otp : rand}}
+        )
 
         var transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -74,6 +72,27 @@ router.post('/loginotp',async (req,res) =>{
     {
         res.json({message : false})
     }
+})
+
+router.get('/add',async(req,res)=>{
+
+    const cleaner = Cleaner({
+        email : 'cleaner1@carwash.com',
+        name : 'cleaner1',
+        phone : 9638409066,
+        address : 'abc',
+        flag : 0
+    })    
+
+    const rand = Math.trunc(Math.random() * 1000000)
+    const otp = new OTP({
+    email : req.body.email,
+    otp : rand
+    })
+          
+    await otp.save()
+    await cleaner.save()
+
 })
 
 module.exports = router
