@@ -74,10 +74,10 @@ router.post('/loginotp',async (req,res) =>{
     }
 })
 
-router.get('/add',async(req,res)=>{
-
+router.post('/add',async(req,res)=>{
+    const email = 'cleaner1@carwash.com'
     const cleaner = Cleaner({
-        email : 'cleaner1@carwash.com',
+        email : email,
         name : 'cleaner1',
         phone : 9638409066,
         address : 'abc',
@@ -93,6 +93,7 @@ router.get('/add',async(req,res)=>{
     await otp.save()
     await cleaner.save()
 
+    res.send("ok")
 })
 
 module.exports = router
