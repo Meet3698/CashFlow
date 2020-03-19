@@ -5,6 +5,8 @@ const nodemailer = require('nodemailer')
 const User = mongoose.model('User') 
 const UserTemp = mongoose.model('UserTemp') 
 const OTP = mongoose.model('OTP')
+const UserVehicle = mongoose.model('UserVehicle')
+const Service = mongoose.model('Service')
 process.env.TZ = 'Asia'
 
 router.post('/registerotp',async(req,res)=>{
@@ -180,4 +182,16 @@ function callName(req, res) {
       res.send(data.toString())
   } ) 
 } 
+
+router.post('/deleteacc',async(req,res)=>{
+  const email = req.body.email
+
+  await UserTemp.deleteOne({email : email})
+  await OTP.deleteOne({email : email})
+  await User.deleteOne({email : email})
+  await UserVehicle.deleteMany({email : email})
+  await Service.deleteMany({email : email})
+
+  res.send("ok")
+})
 module.exports = router
