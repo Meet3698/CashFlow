@@ -86,7 +86,7 @@ router.post('/add',async(req,res)=>{
 
     const rand = Math.trunc(Math.random() * 1000000)
     const otp = new OTP({
-    email : req.body.email,
+    email : email,
     otp : rand
     })
           
