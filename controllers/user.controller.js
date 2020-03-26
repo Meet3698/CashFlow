@@ -194,4 +194,11 @@ router.post('/deleteacc',async(req,res)=>{
 
   res.send("ok")
 })
+
+router.get('/',(req,res)=>{
+  var someDate = new Date();
+  var numberOfDaysToAdd = 12;
+  someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+  console.log(someDate);
+})
 module.exports = router

@@ -82,12 +82,18 @@ router.post('/',async(req,res)=>{
 //---------------------------------------------------------------------
 router.post('/flag',async(req,res)=>{
     const email = req.body.email
-
+    const email1 = req.body.email1
+    const date = new Date().getDate()
+    
     await Cleaner.updateOne(
         { email : email },
         {$set : { flag : 0}
     })
 
+    await Service.updateOne(
+        {email : email1},
+        {$set : {currentdate : date}
+    })
     res.send({message : true})
 })
 //--------------------------------------------------------------------

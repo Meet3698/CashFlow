@@ -23,7 +23,7 @@ const PackageSchema = new mongoose.Schema({
         type : String
     },
     duration : {
-        type : String
+        type : Number
     },
     timeCost : {
         type : Number

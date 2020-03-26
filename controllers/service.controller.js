@@ -5,10 +5,6 @@ const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const UserVehicle = mongoose.model('UserVehicle')
 
-router.get('/',async(req,res)=>{
-    res.sendfile('./view/delete.html')
-})
-
 router.post('/find',async(req,res)=>{
     const email = req.body.email
     const catagory = req.body.vehicleCatagory
@@ -46,16 +42,10 @@ router.post('/add',async(req,res)=>{
     })
 })
 
-router.get('/show',async(req,res)=>{
-    Service.find({}).then((err,data)=>{
-        if(err){
-            res.json(err)
-        }
-        else{
-            res.json(data)
-            await  
-        }
-    })
+router.get('/refresh',(req,res)=>{      
+    setInterval(() => {
+        Service.updateMany({},{flag : 0})
+    }, 300000);
 })
 
 module.exports = router

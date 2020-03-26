@@ -20,10 +20,7 @@ const UserVehicleSchema = new mongoose.Schema({
         type : String,
         unique : true
     },
-    longitude : {
-        type : String
-    },
-    latitude : {
+    address : {
         type : String
     },
     parkingarea : {

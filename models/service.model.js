@@ -16,6 +16,12 @@ const ServiceSchema = new mongoose.Schema({
     },
     flag : {
         type : Number
+    },
+    currentdate : {
+        type : String
+    },
+    expiredate : {
+        type : String
     }
 })
 

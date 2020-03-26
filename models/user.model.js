@@ -14,11 +14,13 @@ const UserSchema = new mongoose.Schema({
    },
     address : {
        type : String
+   },
+   lng : {
+       type : String
+   },
+   lat : {
+       type : String
    }
 })
 
-UserSchema.statics.findUserById = async (email) => {
-    const del = await User.deleteOne({email:email})
-    return del
-}
 mongoose.model('User',UserSchema)
