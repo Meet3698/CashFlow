@@ -23,6 +23,9 @@ const UserVehicleSchema = new mongoose.Schema({
     address : {
         type : String
     },
+    phone : {
+        type : Number
+    },
     parkingarea : {
         type : String
     },

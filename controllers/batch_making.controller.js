@@ -5,6 +5,7 @@ const UserVehicle = mongoose.model('UserVehicle')
 const Service = mongoose.model('Service')
 const Cleaner = mongoose.model('Cleaner')
 const Package = mongoose.model('Package')
+const Track = mongoose.model('Track')
 
 router.post('/',async(req,res)=>{
     let cust = []
@@ -33,6 +34,10 @@ router.post('/',async(req,res)=>{
             {$set : { flag : 1}})
         
         cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
+        
+        const track = new Track({cleaner_email : cleaner.email,user_email : vehicle.email,cleaner_name : cleaner.name, cleaner_phone : cleaner.phone})
+        await track.save()
+
         res.send({list : cust})
     }
     else
@@ -94,6 +99,9 @@ router.post('/flag',async(req,res)=>{
         {email : email1},
         {$set : {currentdate : date}
     })
+
+    await Track.deleteOne({cleaner_email : email})
+    
     res.send({message : true})
 })
 //--------------------------------------------------------------------
