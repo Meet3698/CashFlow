@@ -5,9 +5,6 @@ const TrackSchema = new mongoose.Schema({
        type : String,
        unique : true
    },
-   user_email : {
-       type : String
-   },
    cleaner_phone : {
        type : Number,
        unique : true
