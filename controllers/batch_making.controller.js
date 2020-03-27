@@ -40,7 +40,7 @@ router.post('/',async(req,res)=>{
         
         cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
     
-        const track = new Track({cleaner_email : cleaner.email,user_email : vehicle.email,cleaner_name : cleaner.name, cleaner_phone : cleaner.phone})
+        const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
         await track.save()
 
         res.send({list : cust})
