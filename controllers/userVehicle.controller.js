@@ -9,7 +9,7 @@ const Package = mongoose.model('Package')
 
 router.post('/addvehicle',async (req,res)=>{
     console.log(req.body)
-
+    
     const userVehicle = new UserVehicle(req.body)
     await userVehicle.save((err)=>{
         if(err)
