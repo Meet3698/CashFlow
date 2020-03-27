@@ -42,10 +42,11 @@ router.post('/add',async(req,res)=>{
     })
 })
 
-router.get('/refresh',(req,res)=>{      
+router.get('/refresh',async(req,res)=>{      
     setInterval(() => {
-        Service.updateMany({},{flag : 0})
-    }, 300000);
+        await Service.updateMany({},{flag : 0})
+        console.log('update');
+    }, 2000);
 })
 
 module.exports = router
