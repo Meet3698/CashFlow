@@ -23,7 +23,12 @@ router.post('/',async(req,res)=>{
         console.log(time);
         
         const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
-      
+        
+        console.log(cleaner.email)
+        console.log(vehicle.email)
+        console.log(cleaner.name)
+        console.log(cleaner.phone)
+        
         await Service.collection.updateOne(
             {number :  service[len].number},
             {$set : { flag : 1}}
@@ -34,11 +39,6 @@ router.post('/',async(req,res)=>{
             {$set : { flag : 1}})
         
         cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
-        
-        console.log(cleaner.email)
-        console.log(vehicle.email)
-        console.log(cleaner.name)
-        console.log(cleaner.phone)
     
         const track = new Track({cleaner_email : cleaner.email,user_email : vehicle.email,cleaner_name : cleaner.name, cleaner_phone : cleaner.phone})
         await track.save()
