@@ -17,7 +17,7 @@ router.post('/find',async(req,res)=>{
     {
         const data = await Service.collection.find({number:vehicle[i].number}).toArray()
         console.log(data);
-        if(data == [])
+        if(Object.keys(data).length==0)
         {                
             if(catagory == vehicle[i].vehicleCatagory)
             {
