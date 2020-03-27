@@ -24,11 +24,11 @@ router.post('/',async(req,res)=>{
         
         const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
         
-        console.log(cleaner)
-        console.log(vehicle)
-        // console.log(cleaner.name)
-        // console.log(cleaner.phone)
-
+        console.log(cleaner[0].email)
+        console.log(vehicle[0].email)
+        console.log(cleaner[0].name)
+        console.log(cleaner[0].phone)
+        
         await Service.collection.updateOne(
             {number :  service[len].number},
             {$set : { flag : 1}}
