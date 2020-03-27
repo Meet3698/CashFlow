@@ -104,6 +104,14 @@ router.post('/flag',async(req,res)=>{
     
     res.send({message : true})
 })
+
+router.post('/track',async(req,res)=>{
+    const email = req.body.email
+
+    const data = await Track.findOne({user_email : email})
+
+    res.send({data : data})
+})
 //--------------------------------------------------------------------
 
 module.exports = router
