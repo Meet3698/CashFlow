@@ -35,10 +35,13 @@ router.post('/',async(req,res)=>{
         
         cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
         
-        console.log(cust);
+        console.log(cleaner.email)
+        console.log(vehicle.email)
+        console.log(cleaner.name)
+        console.log(cleaner.phone)
     
-        // const track = new Track({cleaner_email : cleaner.email,user_email : vehicle.email,cleaner_name : cleaner.name, cleaner_phone : cleaner.phone})
-        // await track.save()
+        const track = new Track({cleaner_email : cleaner.email,user_email : vehicle.email,cleaner_name : cleaner.name, cleaner_phone : cleaner.phone})
+        await track.save()
 
         res.send({list : cust})
     }
