@@ -24,30 +24,37 @@ router.post('/',async(req,res)=>{
         
         const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
         
-        console.log(cleaner[0].email)
-        console.log(vehicle[0].email)
-        console.log(cleaner[0].name)
-        console.log(cleaner[0].phone)
+        if(Object.keys(vehicle.length!=0))
+        {
+            console.log(cleaner[0].email)
+            console.log(vehicle[0].email)
+            console.log(cleaner[0].name)
+            console.log(cleaner[0].phone)
+            
+            await Service.collection.updateOne(
+                {number :  service[len].number},
+                {$set : { flag : 1}}
+            )
+            
+            await Cleaner.collection.updateOne(
+                {email:email},
+                {$set : { flag : 1}})
+            
+            cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
         
-        await Service.collection.updateOne(
-            {number :  service[len].number},
-            {$set : { flag : 1}}
-        )
-        
-        await Cleaner.collection.updateOne(
-            {email:email},
-            {$set : { flag : 1}})
-        
-        cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
-    
-        const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
-        await track.save()
+            const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
+            await track.save()
 
-        res.send({list : cust})
+            res.send({list : cust})
+        }
+        else
+        {
+            res.send({message : "error"})
+        }
     }
     else
     {
-        res.send({message:false})
+        res.send({message:false}) 
     }
     // const arr = await Cleaner.collection.find({flag:0}).toArray()
     // const service = await Service.collection.find({flag : 0}).toArray()
