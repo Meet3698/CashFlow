@@ -38,7 +38,7 @@ router.post('/add',async(req,res)=>{
         }
         else
         {
-            res.send({message:1})
+            res.json({message:1})
         }
     })
 })

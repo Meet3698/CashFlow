@@ -45,16 +45,16 @@ router.post('/',async(req,res)=>{
             const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
             await track.save()
 
-            res.send({list : cust})
+            res.json({list : cust})
         }
         else
         {
-            res.send({message : "error"})
+            res.json({err : "err"})
         }
     }
     else
     {
-        res.send({message:false}) 
+        res.json({message:false}) 
     }
     // const arr = await Cleaner.collection.find({flag:0}).toArray()
     // const service = await Service.collection.find({flag : 0}).toArray()
@@ -114,7 +114,7 @@ router.post('/flag',async(req,res)=>{
 
     await Track.deleteOne({cleaner_email : email})
     
-    res.send({message : true})
+    res.json({message : true})
 })
 
 router.post('/track',async(req,res)=>{
@@ -122,7 +122,7 @@ router.post('/track',async(req,res)=>{
 
     const data = await Track.findOne({user_email : email})
 
-    res.send({data : data})
+    res.json({data : data})
 })
 //--------------------------------------------------------------------
 

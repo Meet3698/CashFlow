@@ -45,7 +45,7 @@ router.post('/getvehicle',async(req,res)=>{
     const package = await Package.find({})
     console.log(req.body.email);
     console.log({vehicle : vehicle, service : service, package : package});    
-    res.send({vehicle : vehicle, service : service, package : package})
+    res.josn({vehicle : vehicle, service : service, package : package})
     // const vehicle = await UserVehicle.collection.find({email:req.body.email}).toArray()
     // const len = vehicle.length
     // let pack = []
