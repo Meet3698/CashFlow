@@ -10,7 +10,7 @@ const Track = mongoose.model('Track')
 router.post('/',async(req,res)=>{
     let cust = []
     const email = req.body.email
-    await UserVehicle.find().sort({prefferedTime : -1})
+    await UserVehicle.collection.find().sort({prefferedTime : -1})
     const cleaner = await Cleaner.find({ $and : [{email : email},{flag : 0}]})
     const service = await Service.find({flag:0})
     const len = service.length -1
@@ -23,39 +23,37 @@ router.post('/',async(req,res)=>{
         let time = new Date().getHours() + 6
         console.log(time);
         
-        console.log("number : ",service[len].number);
-        
-        const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
-    
-        console.log(("vehicle : ",vehicle));
-        
-        if(Object.keys(vehicle).length != 0)
+        for(i=0;i<=len;i++)
         {
-            console.log(cleaner[0].email)
-            console.log(vehicle[0].email)
-            console.log(cleaner[0].name)
-            console.log(cleaner[0].phone)
+            const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
+            if(Object.keys(vehicle).length == 0)
+            {
+                continue;
+            }
+            else
+            {
+                console.log(cleaner[0].email)
+                console.log(vehicle[0].email)
+                console.log(cleaner[0].name)
+                console.log(cleaner[0].phone)
+                
+                await Service.collection.updateOne(
+                    {number :  service[len].number},
+                    {$set : { flag : 1}}
+                )
+                
+                await Cleaner.collection.updateOne(
+                    {email:email},
+                    {$set : { flag : 1}})
+                
+                cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
             
-            await Service.collection.updateOne(
-                {number :  service[len].number},
-                {$set : { flag : 1}}
-            )
-            
-            await Cleaner.collection.updateOne(
-                {email:email},
-                {$set : { flag : 1}})
-            
-            cust.push({cleaner : cleaner, vehicle : vehicle, package : package})
-        
-            const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
-            await track.save()
-
-            res.json({list : cust})
+                const track = new Track({cleaner_email : cleaner[0].email,user_email : vehicle[0].email,cleaner_name : cleaner[0].name, cleaner_phone : cleaner[0].phone})
+                await track.save()
+                break
+            }
         }
-        else
-        {
-            res.json({err : "err"})
-        }
+        res.json({list : cust})
     }
     else
     {
