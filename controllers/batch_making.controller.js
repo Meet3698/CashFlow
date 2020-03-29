@@ -10,6 +10,7 @@ const Track = mongoose.model('Track')
 router.post('/',async(req,res)=>{
     let cust = []
     const email = req.body.email
+    await UserVehicle.find().sort({prefferedTime : -1})
     const cleaner = await Cleaner.find({ $and : [{email : email},{flag : 0}]})
     const service = await Service.find({flag:0})
     const len = service.length -1
