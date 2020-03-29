@@ -18,14 +18,12 @@ router.post('/',async(req,res)=>{
     
     if(len >0 && len1>0)
     {
-        const package = await Package.find({packageId:service[i].id})
         let time = new Date().getHours() + 6
         console.log(time);
         
         for(i=0;i<=len;i++)
         {
-            console.log();
-            
+            const package = await Package.find({packageId:service[i].id})   
             const vehicle = await UserVehicle.find({number : service[i].number,prefferedTime:time})
             if(Object.keys(vehicle).length == 0)
             {
