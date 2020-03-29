@@ -25,7 +25,9 @@ router.post('/',async(req,res)=>{
         
         for(i=0;i<=len;i++)
         {
-            const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
+            console.log();
+            
+            const vehicle = await UserVehicle.find({number : service[i].number,prefferedTime:time})
             if(Object.keys(vehicle).length == 0)
             {
                 continue;
@@ -38,7 +40,7 @@ router.post('/',async(req,res)=>{
                 console.log(cleaner[0].phone)
                 
                 await Service.collection.updateOne(
-                    {number :  service[len].number},
+                    {number :  service[i].number},
                     {$set : { flag : 1}}
                 )
                 
