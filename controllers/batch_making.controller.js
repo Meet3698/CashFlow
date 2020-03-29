@@ -17,7 +17,7 @@ router.post('/',async(req,res)=>{
     
     if(len >0 && len1>0)
     {
-        let time = new Date().getHours() + 6
+        let time = new Date().getHours() + 5.5
         console.log(time);
         
         for(i=0;i<len;i++)
