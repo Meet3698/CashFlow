@@ -22,8 +22,12 @@ router.post('/',async(req,res)=>{
         let time = new Date().getHours() + 6
         console.log(time);
         
+        console.log("number : ",service[len].number);
+        
         const vehicle = await UserVehicle.find({number : service[len].number,prefferedTime:time})
     
+        console.log(("vehicle : ",vehicle));
+        
         if(Object.keys(vehicle).length != 0)
         {
             console.log(cleaner[0].email)
