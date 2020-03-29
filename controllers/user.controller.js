@@ -96,6 +96,7 @@ router.post('/verifylogin',async(req,res)=>{
   const otp = await OTP.findOne({email:email})
   console.log(req.body);
   
+  const vehicle = await UserVehicle.findOne({email:email})
   if(otp.otp == req.body.otp)
   { 
     const rand = Math.trunc(Math.random() * 1000000)
@@ -103,7 +104,7 @@ router.post('/verifylogin',async(req,res)=>{
       {email:email},
       {$set : {otp : rand}}
     )
-    res.json({message : true})
+    res.json({message : true,address : vehicle.address, lat : vehicle.lat, lng : vehicle.lng})
   }
   else
   {

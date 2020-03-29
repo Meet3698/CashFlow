@@ -44,8 +44,8 @@ router.post('/add',async(req,res)=>{
 })
 
 router.get('/refresh',(req,res)=>{      
-    setInterval(() => {
-        Service.updateMany({},{flag : 0})
+    setInterval(async() => {
+        await Service.updateMany({},{flag : 0})
         console.log('update');
     }, 60000);
 })
