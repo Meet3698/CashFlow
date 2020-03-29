@@ -16,10 +16,9 @@ router.post('/',async(req,res)=>{
     const len = service.length -1
     const len1 = cleaner.length
     
-    const package = await Package.find({packageId:service[len].id})
-    
     if(len >0 && len1>0)
     {
+        const package = await Package.find({packageId:service[i].id})
         let time = new Date().getHours() + 6
         console.log(time);
         
