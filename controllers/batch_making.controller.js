@@ -12,7 +12,7 @@ router.post('/',async(req,res)=>{
     const email = req.body.email
     const cleaner = await Cleaner.find({ $and : [{email : email},{flag : 0}]})
     const service = await Service.find({flag:0})
-    const len = service.length -1
+    const len = service.length
     const len1 = cleaner.length
     
     if(len >0 && len1>0)
@@ -20,7 +20,7 @@ router.post('/',async(req,res)=>{
         let time = new Date().getHours() + 6
         console.log(time);
         
-        for(i=0;i<=len;i++)
+        for(i=0;i<len;i++)
         {
             const package = await Package.find({packageId:service[i].id})   
             const vehicle = await UserVehicle.find({number : service[i].number,prefferedTime:time})
