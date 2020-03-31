@@ -3,6 +3,8 @@ const router = express.Router()
 const fs = require('fs');
 
 router.post('/write',(req,res)=>{
+    console.log(req.body);
+    
     const jsn = [{
         "name": "Nilesh",
         "school": "RDTC",
