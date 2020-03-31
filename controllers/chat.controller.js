@@ -25,7 +25,7 @@ router.post('/',async(req,res)=>{
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);
   const result = responses[0].queryResult;
-  res.send(result.fulfillmentText)
+  res.json({response:result.fulfillmentText})
 })
 
 module.exports = router
