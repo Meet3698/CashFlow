@@ -14,6 +14,7 @@ router.post('/write',(req,res)=>{
         if (err) throw err
         console.log('File created')
      })
+     res.json({write:true})
 })
 
 router.get('/download',(req,res)=>{ 

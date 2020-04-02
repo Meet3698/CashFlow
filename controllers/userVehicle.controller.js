@@ -58,4 +58,12 @@ router.post('/getvehicle',async(req,res)=>{
     
     // res.send(pack)
 })
+
+router.post('/time',async(req,res)=>{
+    await UserVehicle.updateOne(
+        {email : email},
+        {$set : {prefferedTime : req.body.time}}
+    )
+    res.json({change:true})
+})
 module.exports = router

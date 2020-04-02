@@ -47,6 +47,7 @@ router.get('/refresh',(req,res)=>{
         await Service.updateMany({},{flag : 0})
         console.log('update');
     }, 60000);
+    res.send("ok")
 })
 
 module.exports = router
