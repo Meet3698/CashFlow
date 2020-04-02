@@ -6,21 +6,18 @@ router.post('/write',(req,res)=>{
     console.log(req.body);
     
     const jsn = req.body
-    console.log("json-chat",jsn.email);
-
-    let data = ''
-    for (i = 0; i < jsn.length; i++) {
-        data=jsn.complaint
-        // +'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
-     }
+    
+    let data=''
+    data=data+jsn.email+'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n'
     
     fs.appendFile('new.xls', data, (err) => {
-        if (err) throw err;
-        console.log('File created');
-     });
+        if (err) throw err
+        console.log('File created')
+     })
 })
 
 router.get('/download',(req,res)=>{ 
     res.download('new.xls')
 })
+
 module.exports = router
