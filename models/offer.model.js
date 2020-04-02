@@ -27,9 +27,6 @@ const OfferSchema = new mongoose.Schema({
     },
     timeCost : {
         type : Number
-    },
-    code : {
-        type : String
     }
 })
 
