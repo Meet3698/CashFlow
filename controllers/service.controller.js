@@ -4,7 +4,6 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const UserVehicle = mongoose.model('UserVehicle')
-const Offer = mongoose.model('Offer')
 
 router.post('/find',async(req,res)=>{
     const email = req.body.email
