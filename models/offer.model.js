@@ -17,12 +17,6 @@ const OfferSchema = new mongoose.Schema({
     flag : {
         type : Number
     },
-    currentdate : {
-        type : String
-    },
-    expiredate : {
-        type : String
-    },
     code : {
         type : String
     }
