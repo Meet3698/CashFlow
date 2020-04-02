@@ -8,6 +8,7 @@ router.post('/write',(req,res)=>{
     const jsn = req.body
     console.log("json-chat",jsn.email);
 
+    let data = ''
     for (i = 0; i < jsn.length; i++) {
         data=jsn.complaint
         // +'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
