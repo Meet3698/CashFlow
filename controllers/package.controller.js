@@ -17,7 +17,7 @@ router.get('/show',async(req,res)=>{
 router.get('/offer',async(req,res)=>{
     const offer = await Package.find({flag:1})
     console.log(offer);
-    res.json({offer : offer})
+    res.json(offer)
 })
 
 router.post('/addpack',async (req,res)=>{
