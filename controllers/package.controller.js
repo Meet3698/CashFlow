@@ -14,6 +14,12 @@ router.get('/show',async(req,res)=>{
     res.json(package)
 })
 
+router.get('/offer',async(req,res)=>{
+    const offer = await Package.find({flag:1})
+    console.log(offer);
+    res.json({offer : offer})
+})
+
 router.post('/addpack',async (req,res)=>{
     const package = new Package(req.body)
     await package.save()

@@ -4,7 +4,6 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const UserVehicle = mongoose.model('UserVehicle')
-const Package = mongoose.model('Package')
 
 router.post('/find',async(req,res)=>{
     const email = req.body.email
@@ -41,12 +40,6 @@ router.post('/add',async(req,res)=>{
             res.json({message:1})
         }
     })
-})
-
-router.get('/offer',(req,res)=>{
-    const offer = Package.find({flag:1})
-    console.log(offer);
-    res.json({offer : offer})
 })
 
 router.get('/refresh',(req,res)=>{      
