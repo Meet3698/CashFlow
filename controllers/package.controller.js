@@ -10,15 +10,8 @@ router.get('/',(req,res)=>{
 
 
 router.get('/show',async(req,res)=>{
-    Package.find({}).then((err,data)=>{
-        if(err){
-            res.json(err)
-        }
-        else{
-            res.json(data)
-            await  
-        }
-    })
+    const package = await Package.find({flag:0})
+    res.json({package:package})
 })
 
 router.post('/addpack',async (req,res)=>{
