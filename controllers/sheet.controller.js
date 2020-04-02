@@ -10,7 +10,7 @@ router.post('/write',(req,res)=>{
 
     let data='';
     for (i = 0; i < jsn.length; i++) {
-        data=data+jsn.email
+        data=data+jsn.complaint
         // +'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
      }
     
