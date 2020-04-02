@@ -27,6 +27,9 @@ const PackageSchema = new mongoose.Schema({
     },
     timeCost : {
         type : Number
+    },
+    flag : {
+        type : Number
     }
 })
 
