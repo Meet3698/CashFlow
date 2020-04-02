@@ -61,7 +61,7 @@ router.post('/getvehicle',async(req,res)=>{
 
 router.post('/time',async(req,res)=>{
     await UserVehicle.updateOne(
-        {email : email},
+        {$and : [{email : email,number:number}]},
         {$set : {prefferedTime : req.body.time}}
     )
     res.json({change:true})
