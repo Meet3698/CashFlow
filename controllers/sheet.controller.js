@@ -10,7 +10,8 @@ router.post('/write',(req,res)=>{
 
     let data='';
     for (i = 0; i < jsn.length; i++) {
-        data=data+jsn.email+'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
+        data=data+jsn.email
+        // +'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
      }
     
     fs.appendFile('new.xls', data, (err) => {
