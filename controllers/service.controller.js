@@ -43,7 +43,7 @@ router.post('/add',async(req,res)=>{
 })
 
 router.post('/offer',(req,res)=>{
-    const offer = Offer.find({})
+    const offer = Offer.find({flag:1})
     console.log(offer);
     res.json({offer : offer})
 })
