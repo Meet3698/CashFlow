@@ -1,20 +1,31 @@
 const mongoose = require('mongoose')
 
 const OfferSchema = new mongoose.Schema({
-    email : {
-        type : String,
-    },
-    orderId : {
-        type : String
-    },
-    number : {
-        type : String,
-        unique : true
-    },
-    id : {
+    packageId : {
         type : Number
     },
-    flag : {
+    name : {
+        type : String
+    },
+    price : {
+        type : Number
+    },
+    details: {
+        type : String
+    },
+    description : {
+        type : String
+    },
+    vehicleCatagory : {
+        type : String
+    },
+    vehicleType : {
+        type : String
+    },
+    duration : {
+        type : Number
+    },
+    timeCost : {
         type : Number
     },
     code : {
