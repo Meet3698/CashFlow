@@ -26,7 +26,6 @@ router.post('/find',async(req,res)=>{
             }
         }
     }
-   
     res.send(model)
 })
 

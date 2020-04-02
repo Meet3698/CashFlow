@@ -5,23 +5,11 @@ const fs = require('fs');
 router.post('/write',(req,res)=>{
     console.log(req.body);
     
-    const jsn = [{
-        "name": "Nilesh",
-        "school": "RDTC",
-        "marks": "77"
-       },{
-        "name": "Sagar",
-        "school": "RC",
-        "marks": "99.99"
-       },{
-        "name": "Prashant",
-        "school": "Solapur",
-        "marks": "100"
-     }];
+    const jsn = req.body
     
     let data='';
     for (i = 0; i < jsn.length; i++) {
-        data=data+jsn[i].name+'\t'+jsn[i].school+'\t'+jsn[i].marks+'\n';
+        data=data+jsn.email+'\t'+jsn.num+'\t'+jsn.orderno+'\t'+jsn.type+'\t'+jsn.complaint+'\n';
      }
     
     fs.appendFile('new.xls', data, (err) => {
