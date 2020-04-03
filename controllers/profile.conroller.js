@@ -33,16 +33,16 @@ router.post("/history",async(req,res)=>{
 
 router.post('/getcode',async(req,res)=>{
     const email = req.body.email
-    const service = await Service.find({$and : [{email:email,flag:1}]})
-    code = []
+    const package = await Package.find({flag:1})
+    pack = []
 
     for (i=0;i<service.length;i++)
     {
-        const code = await Code.find({id : service[i].id})
-        const package = await package.find({packageId : service[i].id})
+        const code = await Code.find({id : package[i].id})
+        const service = await service.find({id : service[i].id})
+        pack.push({service : service,package : package[i],code : code})
     }
-    console.log(code,service);
-    res.json({service : service,package : package, code : code})  
+    res.send(pack)
 })
 
 module.exports = router
