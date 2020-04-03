@@ -39,7 +39,7 @@ router.post('/getcode',async(req,res)=>{
     for (i=0;i<package.length;i++)
     {
         const code = await Code.find({id : package[i].packageId})
-        const service = await service.find({$and : [{email : email,id : package[i].packageId}]})
+        const service = await Service.find({$and : [{email : email,id : package[i].packageId}]})
         pack.push({service : service,package : package[i],code : code})
     }
     res.send(pack)
