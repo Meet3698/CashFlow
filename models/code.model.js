@@ -7,7 +7,7 @@ const CodeSchema = new mongoose.Schema({
     code : {
         type : String
     },
-    email : {
+    number : {
         type : String
     }
 })
