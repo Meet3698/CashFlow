@@ -31,18 +31,20 @@ router.post("/history",async(req,res)=>{
     res.send(pack)
 })
 
-router.post('/getcode',async(req,res)=>{
-    const email = req.body.email
-    const package = await Package.find({flag:1})
-    pack = []
+// router.post('/getcode',async(req,res)=>{
+//     const email = req.body.email
+//     const service = await Service.find({email : email})
+//     pack = []
 
-    for (i=0;i<package.length;i++)
-    {
-        const code = await Code.find({id : package[i].packageId})
-        const service = await Service.find({$and : [{email : email,id : package[i].packageId}]})
-        pack.push({service : service,package : package[i],code : code})
-    }
-    res.send(pack)
-})
+//     for (i=0;i<Service.length;i++)
+//     {
+//         const package = Package.find({$and : [{packageId:service[i].id})
+//         if(Object.keys(package).length !=0)
+//         {
+//             const code = await Code.find({id : })
+//         }
+//     }
+//     res.send(pack)
+// })
 
 module.exports = router
