@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const CodeSchema = new mongoose.Schema({
-    email : {
-        type : String
-    },
-    otp : {
+    id : {
         type : Number
+    },
+    code : {
+        type : String
     }
 })
 
