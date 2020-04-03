@@ -24,7 +24,7 @@ router.post("/history",async(req,res)=>{
     for (i = 0; i < len; i++) {
         const res = await Package.collection.find({packageId:id[i].id}).toArray()
         const cust = await UserVehicle.collection.find({number : id[i].number}).toArray()
-        const code = await Code.collection.find({id : id[i].id}).toArray
+        const code = await Code.collection.find({id : id[i].id}).toArray()
         pack.push({package : res, customer : cust, code : code})
     }
     console.log(pack.code);
