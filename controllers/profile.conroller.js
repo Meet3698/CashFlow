@@ -31,4 +31,18 @@ router.post("/history",async(req,res)=>{
     res.send(pack)
 })
 
+router.post('/getcode',async(req,res)=>{
+    const email = req.body.email
+    const service = await Service.find({$and : [{email:email,flag:1}]})
+    code = []
+
+    for (i=0;i<service.length;i++)
+    {
+        const code = await Code.find({id : service[i].id})
+        const package = await package.find({packageId : service[i].id})
+    }
+    console.log(code,service);
+    res.json({service : service,package : package, code : code})  
+})
+
 module.exports = router
