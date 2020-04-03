@@ -4,6 +4,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Service = mongoose.model('Service')
 const UserVehicle = mongoose.model('UserVehicle')
+const Code = mongoose.model('Code')
 
 router.post('/find',async(req,res)=>{
     const email = req.body.email
@@ -30,7 +31,8 @@ router.post('/find',async(req,res)=>{
 
 router.post('/add',async(req,res)=>{
     const service = req.body
-    console.log(service);
+    const code =  req.body
+    console.log(service.code);
     
     Service.collection.insertMany(service,(err,data)=>{
         if(err)
@@ -39,6 +41,7 @@ router.post('/add',async(req,res)=>{
         }
         else
         {
+            // const
             res.json({message:1})
         }
     })
