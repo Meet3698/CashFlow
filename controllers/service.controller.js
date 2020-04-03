@@ -30,8 +30,8 @@ router.post('/find',async(req,res)=>{
 })
 
 router.post('/add',async(req,res)=>{
-    const service = req.body
-    const code =  req.body
+    const service = req.body[0]
+    const code = req.body[1]
     console.log(service);
     
     Service.collection.insertMany(service,(err,data)=>{
@@ -41,7 +41,10 @@ router.post('/add',async(req,res)=>{
         }
         else
         {
-            // const
+            if(Object.keys(code).length !=0)
+            {
+                Code.collection.insertMany(code)
+            }
             res.json({message:1})
         }
     })
