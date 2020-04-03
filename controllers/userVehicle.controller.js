@@ -64,6 +64,6 @@ router.post('/time',async(req,res)=>{
         {$and : [{email : req.body.email,number:req.body.number}]},
         {$set : {prefferedTime : req.body.time}}
     )
-    res.json({change:true})
+    res.json({change:true})  
 })
 module.exports = router

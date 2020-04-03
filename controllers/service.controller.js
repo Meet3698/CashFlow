@@ -30,6 +30,8 @@ router.post('/find',async(req,res)=>{
 
 router.post('/add',async(req,res)=>{
     const service = req.body
+    console.log(service);
+    
     Service.collection.insertMany(service,(err,data)=>{
         if(err)
         {
