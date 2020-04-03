@@ -6,6 +6,9 @@ const CodeSchema = new mongoose.Schema({
     },
     code : {
         type : String
+    },
+    email : {
+        type : String
     }
 })
 
