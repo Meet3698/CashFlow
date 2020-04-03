@@ -50,6 +50,21 @@ router.post('/add',async(req,res)=>{
     })
 })
 
+router.post('/getcode',async(req,res)=>{
+    const email = req.body.email
+    const service = await Service.find($and : [{email:email,flag:1}])
+    code = []
+
+    for (i=0;i<service.length;i++)
+    {
+        const code = await Code.find({id : service[i].id})
+        code.push(code)
+    }
+    console.log(code,service);
+    res.json({service : service, code : code})
+    
+})
+
 router.get('/refresh',(req,res)=>{      
     setInterval(async() => {
         await Service.updateMany({},{flag : 0})
