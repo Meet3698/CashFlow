@@ -3,19 +3,17 @@
         <title>Demo</title>
     </head>
     <body>
-        <form action="/payment" method="POST">
-        email : <input type="email" name="email"><br>
-        type : <input type="text" name="type"><br>
-        brand : <input type="text" name="brand"><br>
-        model : <input type="text" name="model"><br>
-        catagory : <input type="text" name="catagory"><br>
-        number : <input type="text" name="number"><br>
-        parkingarea : <input type="text" name="parkingarea"><br>
-        longitude : <input type="text" name="longitude"><br>
-        latitude : <input type="text" name="latitude"><br>
-        prefferedTime : <input type="text" name="prefferedTime"><br>
-        <!-- catagory : <input type="text" name="catagory"><br>
-        month : <input type="number" name="month"><br> -->
+        <form action="/addpack" method="POST">
+        packageId : <input type="number" name="packageId"><br/>
+        name : <input type="text" name="name"><br/>
+        price : <input type="number" name="price"><br/>
+        details : <input type="text" name="details"><br/>
+        description : <textarea style="white-space:pre-line" type="text" name="description"><br/>
+        vehicleCatagory : <input type="text" name="vehicleCatagory"><br/>
+        vehicleType : <input type="text" value="vehicleType"><br/>
+        duration : <input type="text" value="duration"><br/>
+        timecost : <input type="text" value="timecost"><br/>
+        flag : <input type="number" value="flag">
         <input type="submit" value="submit">
         </form>
     </body>
