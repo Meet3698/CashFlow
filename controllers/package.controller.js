@@ -21,6 +21,7 @@ router.get('/offer',async(req,res)=>{
 })
 
 router.post('/addpack',async (req,res)=>{
+    console.log(req.body);
     const package = new Package(req.body)
     await package.save()
     res.send("ok")
