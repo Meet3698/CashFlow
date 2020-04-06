@@ -202,4 +202,11 @@ router.get('/',(req,res)=>{
   someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
   console.log(someDate);
 })
+
+router.post('/deltemp',async(req,res)=>{
+  const email = req.body.email
+  await UserTemp.deleteOne({email : email})
+  res.json({message : true})
+})
+
 module.exports = router
