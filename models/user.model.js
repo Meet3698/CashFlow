@@ -15,12 +15,6 @@ const UserSchema = new mongoose.Schema({
     address : {
        type : String
    },
-   lng : {
-       type : String
-   },
-   lat : {
-       type : String
-   }
 })
 
 mongoose.model('User',UserSchema)
