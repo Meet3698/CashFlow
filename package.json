@@ -1,0 +1,35 @@
+{
+  "name": "carwash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "async": "^3.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "deasync": "^0.1.19",
+    "dialogflow": "^1.2.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "mongoose": "^5.6.7",
+    "multer": "^1.4.2",
+    "nexmo": "^2.4.1",
+    "nodemailer": "^6.4.3",
+    "path": "^0.12.7",
+    "shortid": "^2.2.15",
+    "uuid": "^7.0.2",
+    "validator": "^11.1.0"
+  }
+}
